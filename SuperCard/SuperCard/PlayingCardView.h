@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) BOOL faceUp;
 
+- (void)pinch:(UIPinchGestureRecognizer *)gesture;
 @end
 
 NS_ASSUME_NONNULL_END
