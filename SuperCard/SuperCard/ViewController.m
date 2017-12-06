@@ -8,14 +8,38 @@
 
 #import "ViewController.h"
 #import "PlayingCardView.h"
+#import "CGPlayingCardDeck.h"
+#import "CGPlayingCard.h"
 
 @interface ViewController ()
+
 @property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
+@property (strong, nonatomic) CGDeck *deck;
 
 @end
 
 @implementation ViewController
+
+- (CGDeck *)deck {
+  if (!_deck) {
+    _deck = [[CGPlayingCardDeck alloc] init];
+  }
+  
+  return _deck;
+}
+
+- (void)drawRandomPlayingCard {
+  CGCard *card = [self.deck drawRandomCard];
+  if ([card isKindOfClass:[CGPlayingCard class]]) {
+    CGPlayingCard *playingCard = (CGPlayingCard *)card;
+    self.playingCardView.rank = playingCard.rank;
+    self.playingCardView.suit = playingCard.suit;
+  }
+}
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+  if (!self.playingCardView.faceUp) {
+    [self drawRandomPlayingCard];
+  }
   self.playingCardView.faceUp = !self.playingCardView.faceUp;
 }
 
