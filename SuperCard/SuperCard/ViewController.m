@@ -14,6 +14,7 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
+@property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
 @property (strong, nonatomic) CGDeck *deck;
 
 @end
@@ -36,6 +37,7 @@
     self.playingCardView.suit = playingCard.suit;
   }
 }
+
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
   if (!self.playingCardView.faceUp) {
     [self drawRandomPlayingCard];
@@ -46,8 +48,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-  self.playingCardView.suit = @"♥️";
-  self.playingCardView.rank = 13;
+//  self.playingCardView.suit = @"♥️";
+//  self.playingCardView.rank = 13;
   [self.playingCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.playingCardView
                                                                                        action:@selector(pinch:)]];
 }

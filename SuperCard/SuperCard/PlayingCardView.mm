@@ -15,9 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Properties
 
-@synthesize faceCardScaleFactor = _faceCardScaleFactor;
-
 #define DEFAULT_FACE_CARD_SCALE_FACTOR 0.90
+@synthesize faceCardScaleFactor = _faceCardScaleFactor;
 
 - (CGFloat)faceCardScaleFactor {
   if (!_faceCardScaleFactor) {
@@ -47,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
   [self setNeedsDisplay];
 }
 
+- (NSString *)rankAsString {
+  return @[@"?", @"A", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"J", @"Q", @"K"][self.rank];
+}
+
+#pragma mark - Gesture Handling
+
 - (void)pinch:(UIPinchGestureRecognizer *)gesture {
   if ((gesture.state == UIGestureRecognizerStateChanged) ||
       (gesture.state == UIGestureRecognizerStateEnded)) {
@@ -54,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
     gesture.scale = 1.0;
   }
 }
+
 #pragma mark - Drawing
 
 #define CORNER_FONT_STANDARD_HEIGHT 180.0
@@ -100,18 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
    }
 }
 
--(void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
-                     verticalOffset:(CGFloat)voffset
-                 mirroredVertically:(BOOL)mirroredVertically {
-  [self drawPipsWithHorizontalOffset:hoffset
-                      verticalOffset:voffset
-                          upsideDown:NO];
-  if (mirroredVertically) {
-    [self drawPipsWithHorizontalOffset:hoffset
-                        verticalOffset:voffset
-                            upsideDown:YES];
-  }
-}
+#pragma  mark - Pips
 
 #define PIP_HOFFSET_PRECENTAGE 0.165
 #define PIP_VOFFSET1_PERCENTAGE 0.090
@@ -165,6 +160,19 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
+-(void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
+                     verticalOffset:(CGFloat)voffset
+                 mirroredVertically:(BOOL)mirroredVertically {
+  [self drawPipsWithHorizontalOffset:hoffset
+                      verticalOffset:voffset
+                          upsideDown:NO];
+  if (mirroredVertically) {
+    [self drawPipsWithHorizontalOffset:hoffset
+                        verticalOffset:voffset
+                            upsideDown:YES];
+  }
+}
+
 - (void)pushContextAndRotateUpsideDown {
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
@@ -176,9 +184,8 @@ NS_ASSUME_NONNULL_BEGIN
   CGContextRestoreGState(UIGraphicsGetCurrentContext());
 }
 
-- (NSString *)rankAsString {
-  return @[@"?", @"A", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"J", @"Q", @"K"][self.rank];
-}
+#pragma mark - Corners
+
 - (void)drawCorners {
   NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
   paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -192,11 +199,14 @@ NS_ASSUME_NONNULL_BEGIN
   textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
   textBounds.size = [cornerText size];
   [cornerText drawInRect:textBounds];
-  
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
-  CGContextRotateCTM(context, M_PI);
+
+  [self pushContextAndRotateUpsideDown];
   [cornerText drawInRect:textBounds];
+  [self popContext];
+//  CGContextRef context = UIGraphicsGetCurrentContext();
+//  CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
+//  CGContextRotateCTM(context, M_PI);
+//  [cornerText drawInRect:textBounds];
 }
 
 #pragma mark - Initialization
@@ -213,11 +223,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
-  if (self) {
-    // Initialization code.
-  }
+  [self setup];
   return self;
 }
+
 @end
+
 
 NS_ASSUME_NONNULL_END
