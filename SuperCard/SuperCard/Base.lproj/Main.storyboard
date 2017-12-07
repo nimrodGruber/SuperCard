@@ -18,13 +18,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDw-mK-sih" customClass="PlayingCardView">
-                                <rect key="frame" x="73" y="129" width="64" height="96"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHV-iL-rT6" customClass="PlayingCardView">
+                                <rect key="frame" x="156" y="129" width="64" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="uTQ-Yh-Ma5"/>
+                                    <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="Rco-vJ-YF7"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9Q-jJ-PnC" customClass="PlayingCardView">
+                                <rect key="frame" x="236" y="129" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J4L-xM-agc" customClass="PlayingCardView">
+                                <rect key="frame" x="74" y="233" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFg-yM-MLY" customClass="PlayingCardView">
+                                <rect key="frame" x="156" y="233" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwS-iI-xfQ" customClass="PlayingCardView">
+                                <rect key="frame" x="236" y="233" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqG-8O-JTb" customClass="PlayingCardView">
+                                <rect key="frame" x="74" y="337" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7D-yY-jAW" customClass="PlayingCardView">
+                                <rect key="frame" x="156" y="337" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zvr-qe-Rp0" customClass="PlayingCardView">
+                                <rect key="frame" x="236" y="337" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzV-tz-cxZ" customClass="PlayingCardView">
+                                <rect key="frame" x="74" y="441" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnF-f3-BYN" customClass="PlayingCardView">
+                                <rect key="frame" x="156" y="441" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ouw-ne-bfT" customClass="PlayingCardView">
+                                <rect key="frame" x="236" y="441" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47y-15-CbB">
+                                <rect key="frame" x="16" y="626" width="122" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHl-r8-70g">
+                                <rect key="frame" x="236" y="621" width="128" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Re-Deal">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reDeal:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bee-0z-uJs"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDw-mK-sih" customClass="PlayingCardView">
+                                <rect key="frame" x="74" y="129" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="zAL-7Z-t0H"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -32,7 +118,19 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="playingCardView" destination="rDw-mK-sih" id="cDt-nJ-wYH"/>
+                        <outlet property="scoreLable" destination="47y-15-CbB" id="PH8-bQ-sxq"/>
+                        <outletCollection property="playingCardViews" destination="SHV-iL-rT6" id="nVT-8B-Fc4"/>
+                        <outletCollection property="playingCardViews" destination="i9Q-jJ-PnC" id="fZU-OW-UHb"/>
+                        <outletCollection property="playingCardViews" destination="J4L-xM-agc" id="tMk-qg-mKJ"/>
+                        <outletCollection property="playingCardViews" destination="PFg-yM-MLY" id="V9n-e3-2Tp"/>
+                        <outletCollection property="playingCardViews" destination="CwS-iI-xfQ" id="fMv-w7-7OD"/>
+                        <outletCollection property="playingCardViews" destination="cqG-8O-JTb" id="Aww-Mz-ebn"/>
+                        <outletCollection property="playingCardViews" destination="o7D-yY-jAW" id="3zl-0S-uSL"/>
+                        <outletCollection property="playingCardViews" destination="Zvr-qe-Rp0" id="wfc-d2-KKh"/>
+                        <outletCollection property="playingCardViews" destination="bzV-tz-cxZ" id="m9T-bH-5p3"/>
+                        <outletCollection property="playingCardViews" destination="vnF-f3-BYN" id="7va-Rx-z5g"/>
+                        <outletCollection property="playingCardViews" destination="Ouw-ne-bfT" id="RD3-fe-sIh"/>
+                        <outletCollection property="playingCardViews" destination="rDw-mK-sih" id="kyL-sk-bKl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
