@@ -2,12 +2,14 @@
 // Created by nimrod gruber.
 
 #import "CGCardMatchingGame.h"
+#import "CGPlayingCardDeck.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGCardMatchingGame()
 
 @property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
+@property (strong, nonatomic) CGPlayingCardDeck *deckOfMatchCards;
 
 @end
 
@@ -17,12 +19,13 @@ static const int kMismatchPenalty = 2;
 static const int kMatchBonus = 4;
 static const int kCostToChoose = 1;
 
-- (nullable instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGDeck *)deck {
+- (nullable instancetype)initWithCardCount:(NSUInteger)count {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
+    _deckOfMatchCards = [[CGPlayingCardDeck alloc] init];
     self.matchMode = 2;
     for (NSUInteger i = 0; i < count; ++i) {
-      CGCard *card = [deck drawRandomCard];
+      CGCard *card = [self.deckOfMatchCards drawRandomCard];
       if (card) {
         [self.cards addObject:card];
       } else {
@@ -57,7 +60,7 @@ static const int kCostToChoose = 1;
       
       if (self.matchMode == 2) {
         matchScore = [card matchTwoCards:self.pickedCards];
-      } else { // if (self.matchMode == 3)
+      } else if (self.matchMode == 3) {
         matchScore = [card matchThreeCards:self.pickedCards];
       }
       

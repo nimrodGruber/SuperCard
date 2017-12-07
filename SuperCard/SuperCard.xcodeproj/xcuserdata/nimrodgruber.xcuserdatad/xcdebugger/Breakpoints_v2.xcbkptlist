@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SuperCard/ViewController.m"
-            timestampString = "534354464.406426"
+            timestampString = "534356260.622574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SuperCard/CGCardMatchingGame.mm"
-            timestampString = "534354464.406655"
+            timestampString = "534356260.622625"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "-chooseCardAtIndex:"
             landmarkType = "7">
          </BreakpointContent>

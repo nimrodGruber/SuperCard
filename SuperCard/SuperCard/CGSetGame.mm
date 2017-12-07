@@ -79,6 +79,7 @@ static const int kCostToChoose = 1;
     if ([self.pickedCards firstObject].matched == NO) {
       [self markCardsChosenSign:card cards:self.pickedCards sign:NO];
     }
+    //REMOVE ALL SET CARDS FROM _cards PROPERTY IN THE SET GAME
     [self.pickedCards removeAllObjects];
   }
 }
