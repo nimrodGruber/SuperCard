@@ -4,7 +4,6 @@
 #import "CGSetCard.h"
 #import "CGSetDeck.h"
 #import "CGSetGame.h"
-#import "HistoryViewController.h"
 #import "SetCardsViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -75,8 +74,6 @@ NS_ASSUME_NONNULL_BEGIN
       [log appendString:[[NSString alloc] initWithFormat:@" mismatch penalty %d points !", self.game.lastMatchScoring]];
     }
   }
-  
-  self.logLable.text = log;
 }
 
 - (NSString *)cardToText: (CGCard*)card {
@@ -166,16 +163,6 @@ NS_ASSUME_NONNULL_BEGIN
       [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
                               NSBackgroundColorAttributeName : [[UIColor purpleColor] colorWithAlphaComponent:0.2] }
                      range:NSMakeRange(0, [title length])];
-    }
-  }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender {
-  if ([segue.identifier isEqualToString:@"setToHistory"]) {
-    if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
-      HistoryViewController *history = (HistoryViewController *) segue.destinationViewController;
-      history.log = self.game.history.logSetGame;
-      //[history updateHistory:self.game.history.logSetGame]; cannot work !
     }
   }
 }

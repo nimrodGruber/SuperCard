@@ -2,7 +2,6 @@
 // Created by nimrod gruber.
 
 #import "CGCardMatchingGame.h"
-#import "HistoryViewController.h"
 #import "MatchingCardsViewController.h"
 #import "CGPlayingCardDeck.h"
 
@@ -63,18 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
       [log appendString:[[NSString alloc] initWithFormat:@" matched for %d points !", self.game.lastMatchScoring]];
     } else {
       [log appendString:[[NSString alloc] initWithFormat:@" mismatch penalty %d points !", self.game.lastMatchScoring]];
-    }
-  }
-  
-  self.logLable.text = log;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender {
-  if ([segue.identifier isEqualToString:@"matchGameToHistory"]) {
-    if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
-      HistoryViewController *history = (HistoryViewController *) segue.destinationViewController;
-      //[history updateHistory:self.game.history.logMatchGame]; //cannot work!
-      history.log = self.game.history.logMatchGame;
     }
   }
 }

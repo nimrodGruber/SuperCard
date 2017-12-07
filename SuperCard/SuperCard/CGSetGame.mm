@@ -22,7 +22,6 @@ static const int kCostToChoose = 1;
 - (nullable instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGDeck *)deck {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
-    _history = [[HistoryBoss alloc] init];
     self.matchMode = 3;
     for (NSUInteger i = 0; i < count; ++i) {
       CGCard *card = [deck drawRandomCard];
@@ -52,10 +51,8 @@ static const int kCostToChoose = 1;
   } else if (card.chosen) {
     card.chosen = NO;
     [self.pickedCards removeObject:card];
-    [self.history.logSetGame removeLastObject];
   } else {
     card.chosen = YES;
-    [self.history.logSetGame addObject:[self cardToText:card]];
     
     if (self.pickedCards.count == self.matchMode - 1) {
       int matchScore = 0;
@@ -65,11 +62,9 @@ static const int kCostToChoose = 1;
         self.score += matchScore * kMatchBonus;
         self.lastMatchScoring = matchScore * kMatchBonus;
         [self markCardsMatchedSign:card cards:self.pickedCards sign:YES];
-        [self addHistoryOfMatch];
       } else {
         self.score -= kMismatchPenalty;
         self.lastMatchScoring = kMismatchPenalty;
-        [self addHistoryOfMismatch];
       }
     }
     
@@ -125,16 +120,6 @@ static const int kCostToChoose = 1;
   }
   
   return textCard;
-}
-
-- (void)addHistoryOfMatch {
-  NSString *result = [[NSString alloc] initWithFormat:@" matched for %d points !\n", self.lastMatchScoring];;
-  [self.history.logSetGame addObject:result];
-}
-
-- (void)addHistoryOfMismatch {
-  NSString *result = [[NSString alloc] initWithFormat:@" mismatch penalty %d points !\n", self.lastMatchScoring];
-  [self.history.logSetGame addObject:result];
 }
 
 @end
