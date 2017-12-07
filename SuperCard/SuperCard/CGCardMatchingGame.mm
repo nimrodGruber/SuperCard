@@ -20,7 +20,6 @@ static const int kCostToChoose = 1;
 - (nullable instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGDeck *)deck {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
-    self.log = [[NSMutableString alloc] init];
     self.matchMode = 2;
     for (NSUInteger i = 0; i < count; ++i) {
       CGCard *card = [deck drawRandomCard];

@@ -45,7 +45,7 @@
 }
 
 - (void)drawRandomPlayingCard:(PlayingCardView *)card {
-  CGCard *tmp = [self.deck drawRandomCard];
+  CGCard *tmp = [self.deck drawRandomCard]; //should be [self createDeck]
   if ([tmp isKindOfClass:[CGPlayingCard class]]) {
     card.rank = ((CGPlayingCard *)tmp).rank;
     card.suit = ((CGPlayingCard *)tmp).suit;

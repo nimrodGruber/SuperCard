@@ -3,8 +3,6 @@
 
 #import "CGDeck.h"
 
-//#import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGCardGame : NSObject
@@ -12,11 +10,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGCard *)cardAtIndex:(NSUInteger)index; // Abstract.
 - (void)chooseCardAtIndex:(NSUInteger)index; // Abstract.
 
-@property (nonatomic) NSMutableString *log;
-@property (nonatomic) NSUInteger matchMode;
-@property (nonatomic) NSInteger score;
-@property (strong, nonatomic, nullable) NSMutableArray<CGCard *> *pickedCards;
 @property (nonatomic) int lastMatchScoring;
+@property (nonatomic) NSUInteger matchMode;
+@property (strong, nonatomic, nullable) NSMutableArray<CGCard *> *pickedCards;
+@property (nonatomic) NSInteger score;
 
 @end
 

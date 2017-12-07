@@ -8,8 +8,6 @@
 
 #import "CGDeck.h"
 
-//#import <UIKit/UIKit.h>
-
 @interface ViewController : UIViewController
 
 // For subclasses.

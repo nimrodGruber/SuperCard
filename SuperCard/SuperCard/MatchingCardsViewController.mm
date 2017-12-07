@@ -46,23 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
     cardButton.enabled = !card.matched;
     
     self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
-    
-    [self logUpdateInTheUI];
-  }
-}
-
-- (void)logUpdateInTheUI {
-  NSMutableString *log = [[NSMutableString alloc] init];
-  for (CGCard *card in self.game.pickedCards) {
-    [log appendString:card.contents];
-  }
-  
-  if ([self.game.pickedCards count] == self.game.matchMode) {
-    if ([self.game.pickedCards firstObject].matched) {
-      [log appendString:[[NSString alloc] initWithFormat:@" matched for %d points !", self.game.lastMatchScoring]];
-    } else {
-      [log appendString:[[NSString alloc] initWithFormat:@" mismatch penalty %d points !", self.game.lastMatchScoring]];
-    }
   }
 }
 
