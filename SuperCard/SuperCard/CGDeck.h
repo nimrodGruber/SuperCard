@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addCard:(CGCard *)card atTop:(BOOL)atTop;
 
 - (CGCard *)drawRandomCard;
+- (CGDeck *)getDeck;
 
 @end
 

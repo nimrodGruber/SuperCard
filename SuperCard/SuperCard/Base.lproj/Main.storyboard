@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Matching Cards View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MatchingCardsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,6 +131,7 @@
                         <outletCollection property="playingCardViews" destination="vnF-f3-BYN" id="7va-Rx-z5g"/>
                         <outletCollection property="playingCardViews" destination="Ouw-ne-bfT" id="RD3-fe-sIh"/>
                         <outletCollection property="playingCardViews" destination="rDw-mK-sih" id="kyL-sk-bKl"/>
+                        <outletCollection property="playingCardViews" destination="i9Q-jJ-PnC" id="dBA-V8-uJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

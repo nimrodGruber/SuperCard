@@ -15,7 +15,6 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
-@property (strong, nonatomic) CGDeck *deck;
 @property (strong, nonatomic) CGCardGame *game;
 
 @end
@@ -36,16 +35,16 @@
 }
 
 
-- (CGDeck *)deck { //soon to be nil and abstract so that child can implement set/match game accordingly
-  if (!_deck) {
-    _deck = [[CGPlayingCardDeck alloc] init];
-  }
-  
-  return _deck;
-}
+//- (CGDeck *)deck { //soon to be nil and abstract so that child can implement set/match game accordingly
+//  if (!_deck) {
+//    _deck = [[CGPlayingCardDeck alloc] init];
+//  }
+//
+//  return _deck;
+//}
 
 - (void)drawRandomPlayingCard:(PlayingCardView *)card {
-  CGCard *tmp = [self.deck drawRandomCard]; //should be [self createDeck]
+  CGCard *tmp = [[self.game getDeck] drawRandomCard];
   if ([tmp isKindOfClass:[CGPlayingCard class]]) {
     card.rank = ((CGPlayingCard *)tmp).rank;
     card.suit = ((CGPlayingCard *)tmp).suit;
@@ -69,7 +68,7 @@
 }
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view]; //[self.cardButtons indexOfObject:sender];
+  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
   NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
   PlayingCardView *card = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
   if (!card.faceUp) {
@@ -88,7 +87,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-
+  
+//  self.game = [[CGCardGame alloc] init];
+  
   for (PlayingCardView *view in self.playingCardViews) {
     [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
     [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];

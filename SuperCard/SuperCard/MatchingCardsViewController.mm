@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MatchingCardsViewController ()
 
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
 @property (strong, nonatomic) CGCardMatchingGame *game;
 
 @end
@@ -30,20 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGCardMatchingGame *)game {
   if (!_game) {
-    _game = [[CGCardMatchingGame alloc] initWithCardCount:self.cardButtons.count usingDeck:[self createDeck]];
+    _game = [[CGCardMatchingGame alloc] initWithCardCount:self.playingCardViews.count];
   }
   
   return _game;
 }
 
 - (void)updateUI {
-  for (UIButton *cardButton in self.cardButtons) {
-    NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-    CGCard *card = [self.game cardAtIndex:cardButtonIndex];
+  for (PlayingCardView *cardView in self.playingCardViews) {
+    NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
+    CGCard *card = [self.game cardAtIndex:cardViewIndex];
     
-    [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
-    [cardButton setBackgroundImage:[self backGroundImageForCard:card] forState:UIControlStateNormal];
-    cardButton.enabled = !card.matched;
+//    [cardView setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+//    [cardView setBackgroundImage:[self backGroundImageForCard:card] forState:UIControlStateNormal];
+//    cardView.enabled = !card.matched;
     
     self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
   }

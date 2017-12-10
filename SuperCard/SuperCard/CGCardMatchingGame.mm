@@ -9,7 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGCardMatchingGame()
 
 @property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
-@property (strong, nonatomic) CGPlayingCardDeck *deckOfMatchCards;
+@property (strong, nonatomic) CGPlayingCardDeck *deck;
 
 @end
 
@@ -22,10 +22,10 @@ static const int kCostToChoose = 1;
 - (nullable instancetype)initWithCardCount:(NSUInteger)count {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
-    _deckOfMatchCards = [[CGPlayingCardDeck alloc] init];
+    _deck = [[CGPlayingCardDeck alloc] init];
     self.matchMode = 2;
     for (NSUInteger i = 0; i < count; ++i) {
-      CGCard *card = [self.deckOfMatchCards drawRandomCard];
+      CGCard *card = [self.deck drawRandomCard];
       if (card) {
         [self.cards addObject:card];
       } else {
@@ -87,6 +87,10 @@ static const int kCostToChoose = 1;
     }
     [self.pickedCards removeAllObjects];
   }
+}
+
+- (CGDeck *)getDeck {
+  return self.deck;
 }
 
 - (void)markCardsChosenSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {

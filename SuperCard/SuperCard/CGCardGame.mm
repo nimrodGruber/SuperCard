@@ -7,11 +7,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation CGCardGame
 
-- (instancetype)init {
+- (nullable instancetype)init {
   if (self = [super init]) {
+//    _deck = [[CGDeck alloc] init];
+    _lastMatchScoring = 0;
     _pickedCards = [[NSMutableArray<CGCard *> alloc] init];
     _score = 0;
-    _lastMatchScoring = 0;
   }
   
   return self;
@@ -22,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)chooseCardAtIndex:(NSUInteger)index { // Abstract.
+}
+
+- (CGDeck *)getDeck { // Abstract.
+  return nil;
 }
 
 @end

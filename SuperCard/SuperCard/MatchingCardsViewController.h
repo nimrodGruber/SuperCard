@@ -2,6 +2,7 @@
 // Created by nimrod gruber.
 
 #import "ViewController.h"
+#import "PlayingCardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
