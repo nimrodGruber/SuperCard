@@ -49,7 +49,7 @@
     card.rank = ((CGPlayingCard *)tmp).rank;
     card.suit = ((CGPlayingCard *)tmp).suit;
   } //else if ([card isKindOfClass:[CGSetCard class]]) {
-  //    add the set card option;
+  //    assign value to setCard;
   //}
 }
 
@@ -68,13 +68,33 @@
 }
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+//  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
+//  NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
+//  PlayingCardView *card = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
+//  if ([card cardIsNotInitialized]) {
+//    [self drawRandomPlayingCard:card];
+//  }
+//  [self.game chooseCardAtIndex:chosenButtonIndex];
+//  card.faceUp = !card.faceUp;
+  
   NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
   NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
-  PlayingCardView *card = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
-  if (!card.faceUp) {
-    [self drawRandomPlayingCard:card];
+  PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
+  if ([cardView cardIsNotInitialized]) {
+    [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
+    //[self drawRandomPlayingCard:card];
   }
-  card.faceUp = !card.faceUp;
+  [self.game chooseCardAtIndex:chosenButtonIndex];
+  [self updateUI];
+  //card.faceUp = !card.faceUp;
+}
+
+- (void)initializeCardDisplay:(PlayingCardView *) card atIndex:(NSUInteger) index {
+  CGCard *tmp = [self.game getCardAtIndex:index];
+  if ([tmp isKindOfClass:[CGPlayingCard class]]) {
+    card.rank = ((CGPlayingCard *)tmp).rank;
+    card.suit = ((CGPlayingCard *)tmp).suit;
+  }
 }
 
 - (NSString *)titleForCard:(CGCard *)card {
@@ -87,9 +107,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-  
-//  self.game = [[CGCardGame alloc] init];
-  
+
   for (PlayingCardView *view in self.playingCardViews) {
     [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
     [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];

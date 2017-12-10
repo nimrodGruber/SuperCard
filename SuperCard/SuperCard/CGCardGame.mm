@@ -9,7 +9,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)init {
   if (self = [super init]) {
-//    _deck = [[CGDeck alloc] init];
     _lastMatchScoring = 0;
     _pickedCards = [[NSMutableArray<CGCard *> alloc] init];
     _score = 0;

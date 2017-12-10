@@ -41,9 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
     NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
     CGCard *card = [self.game cardAtIndex:cardViewIndex];
     
-//    [cardView setTitle:[self titleForCard:card] forState:UIControlStateNormal];
-//    [cardView setBackgroundImage:[self backGroundImageForCard:card] forState:UIControlStateNormal];
-//    cardView.enabled = !card.matched;
+    [cardView setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+    [cardView setBackgroundImage:[self backGroundImageForCard:card] forState:UIControlStateNormal];
+    cardView.enabled = !card.matched;
     
     self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
   }

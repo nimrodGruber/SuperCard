@@ -27,12 +27,6 @@
                                     <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="Rco-vJ-YF7"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9Q-jJ-PnC" customClass="PlayingCardView">
-                                <rect key="frame" x="236" y="129" width="64" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J4L-xM-agc" customClass="PlayingCardView">
                                 <rect key="frame" x="74" y="233" width="64" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -113,6 +107,12 @@
                                     <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="zAL-7Z-t0H"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cFG-RF-phT" customClass="PlayingCardView">
+                                <rect key="frame" x="236" y="129" width="64" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -120,7 +120,6 @@
                     <connections>
                         <outlet property="scoreLable" destination="47y-15-CbB" id="PH8-bQ-sxq"/>
                         <outletCollection property="playingCardViews" destination="SHV-iL-rT6" id="nVT-8B-Fc4"/>
-                        <outletCollection property="playingCardViews" destination="i9Q-jJ-PnC" id="fZU-OW-UHb"/>
                         <outletCollection property="playingCardViews" destination="J4L-xM-agc" id="tMk-qg-mKJ"/>
                         <outletCollection property="playingCardViews" destination="PFg-yM-MLY" id="V9n-e3-2Tp"/>
                         <outletCollection property="playingCardViews" destination="CwS-iI-xfQ" id="fMv-w7-7OD"/>
@@ -131,7 +130,7 @@
                         <outletCollection property="playingCardViews" destination="vnF-f3-BYN" id="7va-Rx-z5g"/>
                         <outletCollection property="playingCardViews" destination="Ouw-ne-bfT" id="RD3-fe-sIh"/>
                         <outletCollection property="playingCardViews" destination="rDw-mK-sih" id="kyL-sk-bKl"/>
-                        <outletCollection property="playingCardViews" destination="i9Q-jJ-PnC" id="dBA-V8-uJS"/>
+                        <outletCollection property="playingCardViews" destination="cFG-RF-phT" id="UrK-kp-Or4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

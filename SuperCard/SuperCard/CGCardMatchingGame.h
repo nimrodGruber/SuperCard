@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGCard *)cardAtIndex:(NSUInteger)index;
 - (void)chooseCardAtIndex:(NSUInteger)index;
 
+- (CGCard *) getCardAtIndex:(NSUInteger) index;
+
 @end
 
 NS_ASSUME_NONNULL_END

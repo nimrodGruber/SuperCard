@@ -93,6 +93,10 @@ static const int kCostToChoose = 1;
   return self.deck;
 }
 
+- (CGCard *) getCardAtIndex:(NSUInteger) index {
+  return self.cards[index];
+}
+
 - (void)markCardsChosenSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {
   for (CGCard *picked in cards) {
     picked.chosen = sign;

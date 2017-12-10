@@ -227,6 +227,14 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
+- (BOOL)cardIsNotInitialized {
+  if (self.rank == 0) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
 @end
 
 

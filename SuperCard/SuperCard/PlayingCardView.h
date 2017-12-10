@@ -5,11 +5,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayingCardView : UIView
 
+- (BOOL)cardIsNotInitialized;
+- (void)pinch:(UIPinchGestureRecognizer *)gesture;
+
 @property (nonatomic) NSUInteger rank;
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) BOOL faceUp;
 
-- (void)pinch:(UIPinchGestureRecognizer *)gesture;
 @end
 
 NS_ASSUME_NONNULL_END

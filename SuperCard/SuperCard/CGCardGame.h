@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)chooseCardAtIndex:(NSUInteger)index; // Abstract.
 
 - (CGDeck *)getDeck; // Abstract.
+- (CGCard *) getCardAtIndex:(NSUInteger) index; //Abstract.
 
 //@property (strong, nonatomic) CGDeck *deck;
 @property (nonatomic) int lastMatchScoring;
