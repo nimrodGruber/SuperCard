@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
     CGCard *card = [self.game cardAtIndex:cardViewIndex];
     card.chosen ? (cardView.faceUp = YES) : (cardView.faceUp = NO);
+    card.matched ? (cardView.hidden = YES) : (cardView.hidden = NO);
     [cardView updateCardDisplay:((CGPlayingCard *)card).suit rank:((CGPlayingCard *)card).rank];
   }
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
