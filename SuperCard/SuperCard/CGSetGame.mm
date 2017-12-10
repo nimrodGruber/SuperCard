@@ -79,7 +79,7 @@ static const int kCostToChoose = 1;
     if ([self.pickedCards firstObject].matched == NO) {
       [self markCardsChosenSign:card cards:self.pickedCards sign:NO];
     }
-    //REMOVE ALL SET CARDS FROM _cards PROPERTY IN THE SET GAME
+    //for task 3 - if cards are matched, remove them from _cards property
     [self.pickedCards removeAllObjects];
   }
 }
@@ -103,7 +103,7 @@ static const int kCostToChoose = 1;
 - (NSString *)cardToText:(CGCard*)card {
   CGSetCard *setCard = (CGSetCard *)card;
   NSMutableString *textCard = [[NSMutableString alloc] init];
-  
+  //use switch case
   if (setCard.number == 1) {
     [textCard appendString:@"1"];
   } else if (setCard.number == 2) {

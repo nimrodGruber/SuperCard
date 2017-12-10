@@ -12,7 +12,6 @@
 
 // For subclasses.
 - (CGDeck *)createDeck; // Abstract.
-- (NSString *)titleForCard:(CGCard *)card; // Abstract.
 - (UIImage *)backGroundImageForCard:(CGCard *)card; // Abstract.
 - (void)updateUI; // Abstract.
 

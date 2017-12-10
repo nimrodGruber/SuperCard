@@ -10,6 +10,7 @@
 #import "CGPlayingCardDeck.h"
 #import "CGPlayingCard.h"
 #import "PlayingCardView.h"
+#import "CGSetCard.h"
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -34,59 +35,29 @@
   return _game;
 }
 
-
-//- (CGDeck *)deck { //soon to be nil and abstract so that child can implement set/match game accordingly
-//  if (!_deck) {
-//    _deck = [[CGPlayingCardDeck alloc] init];
-//  }
-//
-//  return _deck;
-//}
-
 - (void)drawRandomPlayingCard:(PlayingCardView *)card {
   CGCard *tmp = [[self.game getDeck] drawRandomCard];
   if ([tmp isKindOfClass:[CGPlayingCard class]]) {
     card.rank = ((CGPlayingCard *)tmp).rank;
     card.suit = ((CGPlayingCard *)tmp).suit;
-  } //else if ([card isKindOfClass:[CGSetCard class]]) {
-  //    assign value to setCard;
-  //}
+  } else if ([tmp isKindOfClass:[CGSetCard class]]) {
+    //TODO - finish this section
+  }
 }
-
-//- (void)drawRandomPlayingCard {
-//  CGCard *card = [self.deck drawRandomCard];
-//  if ([card isKindOfClass:[CGPlayingCard class]]) {
-//    CGPlayingCard *playingCard = (CGPlayingCard *)card;
-//    self.playingCardView.rank = playingCard.rank;
-//    self.playingCardView.suit = playingCard.suit;
-//  }
-//}
 
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
-  //self.playingCardViews = nil;
   [self updateUI];
 }
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-//  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
-//  NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
-//  PlayingCardView *card = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
-//  if ([card cardIsNotInitialized]) {
-//    [self drawRandomPlayingCard:card];
-//  }
-//  [self.game chooseCardAtIndex:chosenButtonIndex];
-//  card.faceUp = !card.faceUp;
-  
   NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
   NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
   PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
   if ([cardView cardIsNotInitialized]) {
     [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
-    //[self drawRandomPlayingCard:card];
   }
   [self.game chooseCardAtIndex:chosenButtonIndex];
-  cardView.faceUp = !cardView.faceUp;
   [self updateUI];
 }
 
@@ -96,10 +67,6 @@
     card.rank = ((CGPlayingCard *)tmp).rank;
     card.suit = ((CGPlayingCard *)tmp).suit;
   }
-}
-
-- (NSString *)titleForCard:(CGCard *)card {
-  return card.chosen ? card.contents : @"";
 }
 
 - (void)updateUI { // Abstract.

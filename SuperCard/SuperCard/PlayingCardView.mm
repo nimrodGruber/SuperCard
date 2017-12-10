@@ -203,10 +203,6 @@ NS_ASSUME_NONNULL_BEGIN
   [self pushContextAndRotateUpsideDown];
   [cornerText drawInRect:textBounds];
   [self popContext];
-//  CGContextRef context = UIGraphicsGetCurrentContext();
-//  CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
-//  CGContextRotateCTM(context, M_PI);
-//  [cornerText drawInRect:textBounds];
 }
 
 #pragma mark - Initialization
