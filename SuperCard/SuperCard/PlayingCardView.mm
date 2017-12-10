@@ -235,6 +235,11 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
+- (void)updateCardDisplay:(NSString *)suit rank:(NSUInteger)rank {
+  self.suit = suit;
+  self.rank = rank;
+}
+
 @end
 
 

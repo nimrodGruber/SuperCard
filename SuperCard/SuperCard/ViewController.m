@@ -64,6 +64,7 @@
 
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
+  //self.playingCardViews = nil;
   [self updateUI];
 }
 
@@ -85,8 +86,8 @@
     //[self drawRandomPlayingCard:card];
   }
   [self.game chooseCardAtIndex:chosenButtonIndex];
+  cardView.faceUp = !cardView.faceUp;
   [self updateUI];
-  //card.faceUp = !card.faceUp;
 }
 
 - (void)initializeCardDisplay:(PlayingCardView *) card atIndex:(NSUInteger) index {

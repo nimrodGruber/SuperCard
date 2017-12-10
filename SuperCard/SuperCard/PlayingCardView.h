@@ -7,6 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)cardIsNotInitialized;
 - (void)pinch:(UIPinchGestureRecognizer *)gesture;
+- (void)updateCardDisplay:(NSString *)suit rank:(NSUInteger)rank;
 
 @property (nonatomic) NSUInteger rank;
 @property (strong, nonatomic) NSString *suit;
