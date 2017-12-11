@@ -230,6 +230,8 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
+#pragma mark - Personal Utility functions
+
 - (BOOL)cardIsNotInitialized {
   if (self.rank == 0) {
     return YES;

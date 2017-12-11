@@ -9,9 +9,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGSetGame : CGCardGame
 
 - (instancetype)init NS_UNAVAILABLE;
-- (nullable instancetype)initWithCardCount:(NSUInteger)count
-                                 usingDeck:(CGDeck *)deck
-    NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCardCount:(NSUInteger)count NS_DESIGNATED_INITIALIZER;
 
 - (CGCard *)cardAtIndex:(NSUInteger)index;
 - (void)chooseCardAtIndex:(NSUInteger)index;

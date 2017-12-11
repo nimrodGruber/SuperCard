@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SetCardsViewController ()
 
 @property (strong, nonatomic) CGSetGame *game;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) IBOutletCollection(SetCardView) NSArray *setCardViews;
 
 @end
 
@@ -31,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGCardGame *)game {
   if (!_game) {
-    _game = [[CGSetGame alloc] initWithCardCount:self.cardButtons.count usingDeck:[self createDeck]];
+    _game = [[CGSetGame alloc] initWithCardCount:self.setCardViews.count];
   }
 
   return _game;
@@ -45,18 +46,18 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)updateUI {
-  for (UIButton *cardButton in self.cardButtons) {
-    NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-    CGCard *card = [self.game cardAtIndex:cardButtonIndex];
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] init];
-    
-    [self extractCardAttributedTitle:card title:title];
-    [cardButton setAttributedTitle:title forState:UIControlStateNormal];
-    [cardButton setBackgroundImage:[self backGroundImageForCard:card]forState:UIControlStateNormal];
-    cardButton.enabled = !card.matched;
-    
-    self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
-  }
+//  for (UIButton *cardButton in self.cardButtons) {
+//    NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
+//    CGCard *card = [self.game cardAtIndex:cardButtonIndex];
+//    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] init];
+//
+//    [self extractCardAttributedTitle:card title:title];
+//    [cardButton setAttributedTitle:title forState:UIControlStateNormal];
+//    [cardButton setBackgroundImage:[self backGroundImageForCard:card]forState:UIControlStateNormal];
+//    cardButton.enabled = !card.matched;
+//
+//    self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+//  }
 }
 
 - (NSString *)cardToText: (CGCard*)card {

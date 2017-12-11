@@ -137,6 +137,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define PIP_FONT_SCALE_FACTOR 0.012
 
+-(void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
+                     verticalOffset:(CGFloat)voffset
+                 mirroredVertically:(BOOL)mirroredVertically {
+  [self drawPipsWithHorizontalOffset:hoffset
+                      verticalOffset:voffset
+                          upsideDown:NO];
+  if (mirroredVertically) {
+    [self drawPipsWithHorizontalOffset:hoffset
+                        verticalOffset:voffset
+                            upsideDown:YES];
+  }
+}
+
 - (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
                       verticalOffset:(CGFloat)voffset
                           upsideDown:(BOOL)upsideDown {
@@ -157,19 +170,6 @@ NS_ASSUME_NONNULL_BEGIN
   }
   if (upsideDown) {
     [self popContext];
-  }
-}
-
--(void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
-                     verticalOffset:(CGFloat)voffset
-                 mirroredVertically:(BOOL)mirroredVertically {
-  [self drawPipsWithHorizontalOffset:hoffset
-                      verticalOffset:voffset
-                          upsideDown:NO];
-  if (mirroredVertically) {
-    [self drawPipsWithHorizontalOffset:hoffset
-                        verticalOffset:voffset
-                            upsideDown:YES];
   }
 }
 

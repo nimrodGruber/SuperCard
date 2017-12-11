@@ -3,6 +3,7 @@
 
 #import "CGSetGame.h"
 #import "CGSetCard.h"
+#import "CGSetDeck.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -10,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGSetGame()
 
 @property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
+@property (strong, nonatomic) CGSetDeck *deck;
 
 @end
 
@@ -19,12 +21,13 @@ static const int kMismatchPenalty = 2;
 static const int kMatchBonus = 15;
 static const int kCostToChoose = 1;
 
-- (nullable instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGDeck *)deck {
+- (nullable instancetype)initWithCardCount:(NSUInteger)count {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
+    _deck = [[CGSetDeck alloc] init];
     self.matchMode = 3;
     for (NSUInteger i = 0; i < count; ++i) {
-      CGCard *card = [deck drawRandomCard];
+      CGCard *card = [self.deck drawRandomCard];
       if (card) {
         [self.cards addObject:card];
       } else {
