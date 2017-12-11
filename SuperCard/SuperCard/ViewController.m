@@ -7,42 +7,29 @@
 //
 
 #import "CGCardGame.h"
+
 #import "CGPlayingCardDeck.h"
 #import "CGPlayingCard.h"
-#import "PlayingCardView.h"
+
+#import "CGSetDeck.h"
 #import "CGSetCard.h"
+
 #import "ViewController.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
+@property (strong, nonatomic) IBOutletCollection(SetCardView) NSArray *setCardViews;
+
 @property (strong, nonatomic) CGCardGame *game;
 
 @end
 
 @implementation ViewController
 
-- (UIImage *)backGroundImageForCard:(CGCard __unused *)card { // Abstract.
-  return nil;
-}
-
-- (CGDeck *)createDeck { // Abstract.
-  return nil;
-}
-
 - (CGCardGame *)game { // Abstract.
   _game = nil;
   return _game;
-}
-
-- (void)drawRandomPlayingCard:(PlayingCardView *)card {
-  CGCard *tmp = [[self.game getDeck] drawRandomCard];
-  if ([tmp isKindOfClass:[CGPlayingCard class]]) {
-    card.rank = ((CGPlayingCard *)tmp).rank;
-    card.suit = ((CGPlayingCard *)tmp).suit;
-  } else if ([tmp isKindOfClass:[CGSetCard class]]) {
-    //TODO - finish this section
-  }
 }
 
 - (IBAction)reDeal:(UIButton *)sender {
@@ -50,23 +37,7 @@
   [self updateUI];
 }
 
-- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
-  NSLog(@"the card index is %lu", (unsigned long)chosenButtonIndex);
-  PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
-  if ([cardView cardIsNotInitialized]) {
-    [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
-  }
-  [self.game chooseCardAtIndex:chosenButtonIndex];
-  [self updateUI];
-}
-
-- (void)initializeCardDisplay:(PlayingCardView *) card atIndex:(NSUInteger) index {
-  CGCard *tmp = [self.game getCardAtIndex:index];
-  if ([tmp isKindOfClass:[CGPlayingCard class]]) {
-    card.rank = ((CGPlayingCard *)tmp).rank;
-    card.suit = ((CGPlayingCard *)tmp).suit;
-  }
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender { // Abstract.
 }
 
 - (void)updateUI { // Abstract.
@@ -80,12 +51,11 @@
     [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
     [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
   }
+  
+  for (SetCardView *view in self.setCardViews) {
+    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
+    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
+  }
 }
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
 
 @end

@@ -7,12 +7,12 @@
 //
 
 #import "CGDeck.h"
+#import "PlayingCardView.h"
+#import "SetCardView.h"
 
 @interface ViewController : UIViewController
 
 // For subclasses.
-- (CGDeck *)createDeck; // Abstract.
-- (UIImage *)backGroundImageForCard:(CGCard *)card; // Abstract.
 - (void)updateUI; // Abstract.
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;

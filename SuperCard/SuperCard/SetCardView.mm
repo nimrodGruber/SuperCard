@@ -2,6 +2,7 @@
 // Created by nimrod gruber.
 
 #import "SetCardView.h"
+#import "CGSetCard.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define CORNER_FONT_STANDARD_HEIGHT 180.0
 #define CORNER_RADIUS 12.0
+static const float kHorizontalCompressionFactor = 0.8;
+static const float kVerticalCompressionFactror = 0.2;
 
 - (CGFloat)cornerScaleFactor {
   return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT;
@@ -81,7 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
    // Drawing code.
    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                                           cornerRadius:[self cornerRadius]];
-   
    [roundedRect addClip];
    
    [[UIColor whiteColor] setFill];
@@ -89,22 +91,112 @@ NS_ASSUME_NONNULL_BEGIN
    
    [[UIColor blackColor] setStroke];
    [roundedRect stroke];
+
+   NSMutableString *imageName = [[NSMutableString alloc] init];
+   [self setImageNameFromCard:imageName];
+   UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", imageName]];
    
-   if (self.faceUp) {
-     UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", [self rankAsString], self.suit]];
-     if (faceImage) {
-       CGRect imageRect = CGRectInset(self.bounds,
-                                      self.bounds.size.width * (1.0 - self.faceCardScaleFactor),
-                                      self.bounds.size.height * (1.0 - self.faceCardScaleFactor));
-       [faceImage drawInRect:imageRect];
-     } else {
-       [self drawPips];
+   if (faceImage) {
+     CGFloat myX = self.bounds.size.width * 0.1; //x-axis indentation of 10% of the cardView
+     CGFloat myY = 0;
+     if (self.number == 1) {
+       [self displayOneForm:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
+     } else if (self.number == 2) {
+       [self displayTwoForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
+     } else if (self.number == 3) {
+       [self displayThreeForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
      }
-     
-     [self drawCorners];
-   } else {
-     [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
    }
+}
+
+- (void)displayOneForm:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
+  myY = self.bounds.size.height * 0.4;
+  CGRect imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect];
+}
+
+- (void)displayTwoForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
+  myY = self.bounds.size.height * 0.2;
+  CGRect imageRect1 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                 self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect1];
+  
+  myY = self.bounds.size.height * 0.6;
+  CGRect imageRect2 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                 self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect2];
+}
+
+-(void) displayThreeForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
+  myY = self.bounds.size.height * 0.1;
+  CGRect imageRect1 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                 self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect1];
+  
+  myY = self.bounds.size.height * 0.4;
+  CGRect imageRect2 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                 self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect2];
+  
+  myY = self.bounds.size.height * 0.7;
+  CGRect imageRect3 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                 self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect3];
+}
+
+- (void)setImageNameFromCard:(NSMutableString *)imageName {
+  [imageName appendString:[self symbolPrefix]];
+  [imageName appendString:[self colorPrefix]];
+  [imageName appendString:[self filling]];
+}
+
+- (NSString *)symbolPrefix {
+  switch (self.symbol) {
+    case diamond:
+      return @"D";
+      break;
+    case oval:
+      return @"O";
+      break;
+    case squiggle:
+      return @"S";
+      break;
+  }
+  
+  return nil;
+}
+
+- (NSString *)colorPrefix {
+  switch (self.color) {
+    case red:
+      return @"R";
+      break;
+    case green:
+      return @"G";
+      break;
+    case purple:
+      return @"P";
+      break;
+  }
+  
+  return nil;
+}
+
+- (NSString *)filling {
+  switch (self.shading) {
+    case solid:
+      return @"solid";
+      break;
+    case striped:
+      return @"striped";
+      break;
+    case unfilled:
+      return @"unfilled";
+      break;
+  }
+  
+  return nil;
 }
 
 #pragma  mark - Pips
@@ -193,22 +285,22 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Corners
 
 - (void)drawCorners {
-  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-  paragraphStyle.alignment = NSTextAlignmentCenter;
-  
-  UIFont *cornerFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-  cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
-  
-  NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", [self rankAsString], self.suit] attributes:@{NSFontAttributeName : cornerFont, NSParagraphStyleAttributeName : paragraphStyle }];
-  
-  CGRect textBounds;
-  textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
-  textBounds.size = [cornerText size];
-  [cornerText drawInRect:textBounds];
-
-  [self pushContextAndRotateUpsideDown];
-  [cornerText drawInRect:textBounds];
-  [self popContext];
+//  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//  paragraphStyle.alignment = NSTextAlignmentCenter;
+//
+//  UIFont *cornerFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+//  cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
+//
+//  NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", [self rankAsString], self.suit] attributes:@{NSFontAttributeName : cornerFont, NSParagraphStyleAttributeName : paragraphStyle }];
+//
+//  CGRect textBounds;
+//  textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
+//  textBounds.size = [cornerText size];
+//  [cornerText drawInRect:textBounds];
+//
+//  [self pushContextAndRotateUpsideDown];
+//  [cornerText drawInRect:textBounds];
+//  [self popContext];
 }
 
 #pragma mark - Initialization
@@ -233,16 +325,18 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Personal Utility functions
 
 - (BOOL)cardIsNotInitialized {
-  if (self.rank == 0) {
+  if (self.color == undefinedColor) {
     return YES;
   } else {
     return NO;
   }
 }
-
-- (void)updateCardDisplay:(NSString *)suit rank:(NSUInteger)rank {
-  self.suit = suit;
-  self.rank = rank;
+- (void)updateCardDisplay:(int)color theNumber:(int)number
+                 theShade:(int)shade theSymbol:(int)symbol {
+  self.color = color;
+  self.number = number;
+  self.shading = shade;
+  self.symbol = symbol;
 }
 
 @end

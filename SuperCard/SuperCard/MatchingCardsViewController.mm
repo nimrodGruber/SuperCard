@@ -17,14 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MatchingCardsViewController
 
-- (CGDeck *)createDeck {
-  return [[CGPlayingCardDeck alloc] init]; 
-}
-
-- (UIImage *)backGroundImageForCard:(CGCard *)card {
-  return [UIImage imageNamed:card.chosen ? @"cardFront" : @"cardBack"];
-}
-
 - (CGCardMatchingGame *)game {
   if (!_game) {
     _game = [[CGCardMatchingGame alloc] initWithCardCount:self.playingCardViews.count];
@@ -42,6 +34,24 @@ NS_ASSUME_NONNULL_BEGIN
     [cardView updateCardDisplay:((CGPlayingCard *)card).suit rank:((CGPlayingCard *)card).rank];
   }
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+}
+
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+    NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
+    PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
+    if ([cardView cardIsNotInitialized]) {
+      [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
+    }
+    [self.game chooseCardAtIndex:chosenButtonIndex];
+    [self updateUI];
+}
+
+- (void)initializeCardDisplay:(PlayingCardView *)card atIndex:(NSUInteger)index {
+  CGCard *tmp = [self.game getCardAtIndex:index];
+  if ([tmp isKindOfClass:[CGPlayingCard class]]) {
+    card.rank = ((CGPlayingCard *)tmp).rank;
+    card.suit = ((CGPlayingCard *)tmp).suit;
+  }
 }
 
 @end

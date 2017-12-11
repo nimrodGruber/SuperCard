@@ -11,24 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SetCardsViewController ()
 
 @property (strong, nonatomic) CGSetGame *game;
-//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) IBOutletCollection(SetCardView) NSArray *setCardViews;
 
 @end
 
 @implementation SetCardsViewController
-
-- (CGDeck *)createDeck {
-  return [[CGSetDeck alloc] init];
-}
-
-- (UIImage *)backGroundImageForCard:(CGCard *)card {
-  if (card.chosen) {
-    return [UIImage imageNamed:@"chosenSetCard"];
-  } else {
-    return [UIImage imageNamed:@"cardFront"];
-  }
-}
 
 - (CGCardGame *)game {
   if (!_game) {
@@ -38,26 +25,35 @@ NS_ASSUME_NONNULL_BEGIN
   return _game;
 }
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+- (void)updateUI {
+  for (SetCardView *cardView in self.setCardViews) {
+    NSUInteger cardViewIndex = [self.setCardViews indexOfObject:cardView];
+    CGCard *card = [self.game cardAtIndex:cardViewIndex];
+    cardView.faceUp = YES;
+    card.matched ? (cardView.alpha = 0.5) : (cardView.alpha = 1);
+    [cardView updateCardDisplay:((CGSetCard *)card).color theNumber:((CGSetCard *)card).number
+                       theShade:((CGSetCard *)card).shading theSymbol:((CGSetCard *)card).symbol];
+  }
+  
+  self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+}
 
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+  NSUInteger chosenButtonIndex = [self.setCardViews indexOfObject:sender.view];
+  SetCardView *cardView = (SetCardView *)self.setCardViews[chosenButtonIndex];
+  if ([cardView cardIsNotInitialized]) {
+    [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
+  }
+  [self.game chooseCardAtIndex:chosenButtonIndex];
   [self updateUI];
 }
 
-- (void)updateUI {
-//  for (UIButton *cardButton in self.cardButtons) {
-//    NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-//    CGCard *card = [self.game cardAtIndex:cardButtonIndex];
-//    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] init];
-//
-//    [self extractCardAttributedTitle:card title:title];
-//    [cardButton setAttributedTitle:title forState:UIControlStateNormal];
-//    [cardButton setBackgroundImage:[self backGroundImageForCard:card]forState:UIControlStateNormal];
-//    cardButton.enabled = !card.matched;
-//
-//    self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
-//  }
+- (void)initializeCardDisplay:(SetCardView *)card atIndex:(NSUInteger)index {
+  CGCard *tmp = [self.game getCardAtIndex:index];
+  card.color = ((SetCardView *)tmp).color;
+  card.number = ((SetCardView *)tmp).number;
+  card.shading = ((SetCardView *)tmp).shading;
+  card.symbol = ((SetCardView *)tmp).symbol;
 }
 
 - (NSString *)cardToText: (CGCard*)card {
@@ -72,11 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
     [textCard appendString:@"3"];
   }
   
-  if (setCard.symbol == triangle) {
+  if (setCard.symbol == diamond) {
     [textCard appendString:@"▲"];
-  } else if (setCard.symbol == circle) {
+  } else if (setCard.symbol == oval) {
     [textCard appendString:@"●"];
-  } else { // (setCard.symbol == square)
+  } else { // (setCard.symbol == squiggle)
     [textCard appendString:@"■"];
   }
   
@@ -87,8 +83,8 @@ NS_ASSUME_NONNULL_BEGIN
   CGSetCard *setCard = (CGSetCard *) card;
   if (setCard.shading == solid) {
     return solid;
-  } else if (setCard.shading == opened) {
-    return opened;
+  } else if (setCard.shading == unfilled) {
+    return unfilled;
   } else { // (setCard.shading == striped)
     return striped;
   }
@@ -114,42 +110,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)findCardSymbol:(CGCard *)card {
    CGSetCard *setCard = (CGSetCard *)card;
 
-   if (setCard.symbol == triangle) {
+   if (setCard.symbol == diamond) {
      return @"▲";
-   } else if (setCard.symbol == circle) {
+   } else if (setCard.symbol == oval) {
      return @"●";
-   } else { //setCard.symbol == squar
+   } else { //setCard.symbol == squiggle
      return @"■";
    }
  }
-
-- (void)extractCardAttributedTitle:(CGCard *)card title:(NSMutableAttributedString *)title {
-  [title appendAttributedString:[[NSAttributedString alloc] initWithString: [[NSString alloc] initWithFormat:@"%d%@",[self findCardNumber:card], [self findCardSymbol:card]]]];
-
-  if ([self findCardShade:card] == opened) {
-    [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
-                            NSStrokeWidthAttributeName : @-5 }
-                   range:NSMakeRange(0, [title length])];
-  } else if ([self findCardShade:card] == solid) {
-    [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
-                            NSStrokeWidthAttributeName : @5 }
-                   range:NSMakeRange(0, [title length])];
-  } else { // (setCard.shading == striped)
-    if ([self findCardColor:card] == [UIColor redColor]) {
-      [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
-                              NSBackgroundColorAttributeName : [[UIColor redColor] colorWithAlphaComponent:0.2] }
-                     range:NSMakeRange(0, [title length])];
-    } else if ([self findCardColor:card] == [UIColor greenColor]) {
-      [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
-                              NSBackgroundColorAttributeName : [[UIColor greenColor] colorWithAlphaComponent:0.2] }
-                     range:NSMakeRange(0, [title length])];
-    } else {
-      [title setAttributes:@{ NSForegroundColorAttributeName : [self findCardColor:card],
-                              NSBackgroundColorAttributeName : [[UIColor purpleColor] colorWithAlphaComponent:0.2] }
-                     range:NSMakeRange(0, [title length])];
-    }
-  }
-}
 
 @end
 

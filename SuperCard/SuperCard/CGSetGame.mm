@@ -44,6 +44,10 @@ static const int kCostToChoose = 1;
   return (index <= self.cards.count) ? self.cards[index] : nil;
 }
 
+- (CGDeck *)getDeck {
+  return self.deck;
+}
+
 - (void)chooseCardAtIndex:(NSUInteger)index {
   CGCard *card = [self cardAtIndex:index];
   
@@ -115,11 +119,11 @@ static const int kCostToChoose = 1;
     [textCard appendString:@"3"];
   }
   
-  if (setCard.symbol == triangle) {
+  if (setCard.symbol == diamond) {
     [textCard appendString:@"▲"];
-  } else if (setCard.symbol == circle) {
+  } else if (setCard.symbol == oval) {
     [textCard appendString:@"●"];
-  } else { // (setCard.symbol == square)
+  } else { // (setCard.symbol == squiggle)
     [textCard appendString:@"■"];
   }
   

@@ -17,14 +17,14 @@ typedef enum {
 typedef enum {
   solid = 0,
   striped = 1,
-  opened = 2,
+  unfilled = 2,
   undefinedShade
 } ShadeType;
 
 typedef enum {
-  triangle = 0,
-  circle = 1,
-  square = 2,
+  diamond = 0,
+  oval = 1,
+  squiggle = 2,
   undefinedSymbol
 } SymbolType;
 
