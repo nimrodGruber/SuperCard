@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F73F69F11FDE4A190082E44E /* SetCardView.mm in Sources */ = {isa = PBXBuildFile; fileRef = F73F69F01FDE4A190082E44E /* SetCardView.mm */; };
 		F7B26FC41FD6D62900E143A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B26FC31FD6D62900E143A6 /* AppDelegate.m */; };
 		F7B26FC71FD6D62900E143A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B26FC61FD6D62900E143A6 /* ViewController.m */; };
 		F7B26FCA1FD6D62900E143A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7B26FC81FD6D62900E143A6 /* Main.storyboard */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F73F69EF1FDE4A190082E44E /* SetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCardView.h; sourceTree = "<group>"; };
+		F73F69F01FDE4A190082E44E /* SetCardView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SetCardView.mm; sourceTree = "<group>"; };
 		F7B26FBF1FD6D62900E143A6 /* SuperCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7B26FC21FD6D62900E143A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F7B26FC31FD6D62900E143A6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				F7B26FC61FD6D62900E143A6 /* ViewController.m */,
 				F7B26FD91FD6D76300E143A6 /* PlayingCardView.h */,
 				F7B26FD81FD6D76300E143A6 /* PlayingCardView.mm */,
+				F73F69EF1FDE4A190082E44E /* SetCardView.h */,
+				F73F69F01FDE4A190082E44E /* SetCardView.mm */,
 				F7CBD67F1FD9734B0062982A /* MatchingCardsViewController.h */,
 				F7CBD6801FD9734B0062982A /* MatchingCardsViewController.mm */,
 				F7CBD6841FD9734C0062982A /* SetCardsViewController.h */,
@@ -211,6 +216,7 @@
 				F7B26FD21FD6D62900E143A6 /* main.m in Sources */,
 				F7CBD68F1FD9734D0062982A /* CGCardGame.mm in Sources */,
 				F7CBD6901FD9734D0062982A /* MatchingCardsViewController.mm in Sources */,
+				F73F69F11FDE4A190082E44E /* SetCardView.mm in Sources */,
 				F7CBD6941FD9734D0062982A /* CGSetGame.mm in Sources */,
 				F7CBD6951FD9734D0062982A /* CGCardMatchingGame.mm in Sources */,
 				F7B26FC41FD6D62900E143A6 /* AppDelegate.m in Sources */,
