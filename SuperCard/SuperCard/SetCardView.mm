@@ -67,6 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define CORNER_RADIUS 12.0
 static const float kHorizontalCompressionFactor = 0.8;
 static const float kVerticalCompressionFactror = 0.2;
+static const float kVerticalIndentationStartPositionFactor = 0.1;
 
 - (CGFloat)cornerScaleFactor {
   return self.bounds.size.height / CORNER_FONT_STANDARD_HEIGHT;
@@ -98,51 +99,59 @@ static const float kVerticalCompressionFactror = 0.2;
    
    if (faceImage) {
      CGFloat myX = self.bounds.size.width * 0.1; //x-axis indentation of 10% of the cardView
-     CGFloat myY = 0;
+//     [self drawShapes:faceImage X:(CGFloat)myX];
+     
      if (self.number == 1) {
-       [self displayOneForm:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
+       [self displayOneForm:faceImage X:(CGFloat)myX];
      } else if (self.number == 2) {
-       [self displayTwoForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
+       [self displayTwoForms:faceImage X:(CGFloat)myX];
      } else if (self.number == 3) {
-       [self displayThreeForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY];
+       [self displayThreeForms:faceImage X:(CGFloat)myX];
      }
    }
 }
 
-- (void)displayOneForm:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
-  myY = self.bounds.size.height * 0.4;
+//- (void)drawShapes:faceImage X:(CGFloat)myX {
+//  CGFloat myY = self.bounds.size.height * kVerticalIndentationStartPositionFactor;
+//
+//  for (int i = 0; i < self.number; ++i) {
+//    CGRect imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+//                                  self.bounds.size.height * kVerticalCompressionFactror);
+//    [faceImage drawInRect:imageRect];
+//    myY = self.bounds.size.height * (kVerticalIndentationStartPositionFactor +
+//                                     (float)((i+1.0)/self.number) - (0.03 * (i+1)));
+//  }
+//}
+
+- (void)displayOneForm:faceImage X:(CGFloat)myX {
+  CGFloat myY = self.bounds.size.height * 0.4;
   CGRect imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
                                 self.bounds.size.height * kVerticalCompressionFactror);
   [faceImage drawInRect:imageRect];
 }
 
-- (void)displayTwoForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
-  myY = self.bounds.size.height * 0.2;
-  CGRect imageRect1 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+- (void)displayTwoForms:faceImage X:(CGFloat)myX {
+  CGFloat myY = self.bounds.size.height * 0.2;
+  CGRect imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
                                  self.bounds.size.height * kVerticalCompressionFactror);
-  [faceImage drawInRect:imageRect1];
+  [faceImage drawInRect:imageRect];
   
   myY = self.bounds.size.height * 0.6;
-  CGRect imageRect2 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
-                                 self.bounds.size.height * kVerticalCompressionFactror);
-  [faceImage drawInRect:imageRect2];
+  imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                         self.bounds.size.height * kVerticalCompressionFactror);
+  [faceImage drawInRect:imageRect];
 }
 
--(void) displayThreeForms:faceImage X:(CGFloat)myX Y:(CGFloat)myY {
-  myY = self.bounds.size.height * 0.1;
-  CGRect imageRect1 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
-                                 self.bounds.size.height * kVerticalCompressionFactror);
-  [faceImage drawInRect:imageRect1];
+-(void) displayThreeForms:faceImage X:(CGFloat)myX {
+  CGFloat myY = self.bounds.size.height * kVerticalIndentationStartPositionFactor;
   
-  myY = self.bounds.size.height * 0.4;
-  CGRect imageRect2 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
-                                 self.bounds.size.height * kVerticalCompressionFactror);
-  [faceImage drawInRect:imageRect2];
-  
-  myY = self.bounds.size.height * 0.7;
-  CGRect imageRect3 = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
-                                 self.bounds.size.height * kVerticalCompressionFactror);
-  [faceImage drawInRect:imageRect3];
+  for (int i = 0; i < self.number; ++i) {
+    CGRect imageRect = CGRectMake(myX, myY, self.bounds.size.width * kHorizontalCompressionFactor,
+                                  self.bounds.size.height * kVerticalCompressionFactror);
+    [faceImage drawInRect:imageRect];
+    myY = self.bounds.size.height * (kVerticalIndentationStartPositionFactor +
+                                     (float)((i+1.0)/self.number) - (0.03 * (i+1)));
+  }
 }
 
 - (void)setImageNameFromCard:(NSMutableString *)imageName {
