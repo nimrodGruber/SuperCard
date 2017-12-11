@@ -79,7 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  - (void)drawRect:(CGRect)rect {
    // Drawing code.
-   UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:[self cornerRadius]];
+   UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                                          cornerRadius:[self cornerRadius]];
    
    [roundedRect addClip];
    
@@ -122,16 +123,21 @@ NS_ASSUME_NONNULL_BEGIN
     [self drawPipsWithHorizontalOffset:PIP_HOFFSET_PRECENTAGE verticalOffset:0 mirroredVertically:NO];
   }
   
-  if ((self.rank == 2) || (self.rank == 3) || (self.rank == 7) || (self.rank == 8) || (self.rank == 10)) {
-    [self drawPipsWithHorizontalOffset:0 verticalOffset:PIP_VOFFSET2_PERCENTAGE mirroredVertically:(self.rank != 7)];
+  if ((self.rank == 2) || (self.rank == 3) || (self.rank == 7) || (self.rank == 8) ||
+      (self.rank == 10)) {
+    [self drawPipsWithHorizontalOffset:0 verticalOffset:PIP_VOFFSET2_PERCENTAGE
+                    mirroredVertically:(self.rank != 7)];
   }
   
-  if ((self.rank ==4) || (self.rank ==5) || (self.rank == 6) || (self.rank == 7) || (self.rank == 8) || (self.rank == 9) || (self.rank == 10)) {
-    [self drawPipsWithHorizontalOffset:PIP_HOFFSET_PRECENTAGE verticalOffset:PIP_VOFFSET3_PERCENTAGE mirroredVertically:YES];
+  if ((self.rank ==4) || (self.rank ==5) || (self.rank == 6) || (self.rank == 7) ||
+      (self.rank == 8) || (self.rank == 9) || (self.rank == 10)) {
+    [self drawPipsWithHorizontalOffset:PIP_HOFFSET_PRECENTAGE
+                        verticalOffset:PIP_VOFFSET3_PERCENTAGE mirroredVertically:YES];
   }
   
   if ((self.rank ==9) || (self.rank == 10)) {
-    [self drawPipsWithHorizontalOffset:PIP_HOFFSET_PRECENTAGE verticalOffset:PIP_VOFFSET1_PERCENTAGE mirroredVertically:YES];
+    [self drawPipsWithHorizontalOffset:PIP_HOFFSET_PRECENTAGE
+                        verticalOffset:PIP_VOFFSET1_PERCENTAGE mirroredVertically:YES];
   }
 }
 
@@ -148,11 +154,11 @@ NS_ASSUME_NONNULL_BEGIN
   pipFont = [pipFont fontWithSize:[pipFont pointSize] * self.bounds.size.width * PIP_FONT_SCALE_FACTOR];
   NSAttributedString *attributedSuit = [[NSAttributedString alloc] initWithString:self.suit attributes:@{NSFontAttributeName : pipFont }];
   CGSize pipSize = [attributedSuit size];
-  CGPoint pipOrigin = CGPointMake(middle.x-pipSize.width/2.0-hoffset*self.bounds.size.width,
-                                  middle.y-pipSize.height/2.0-voffset*self.bounds.size.height);
+  CGPoint pipOrigin = CGPointMake(middle.x - pipSize.width / 2.0 - hoffset * self.bounds.size.width,
+                                  middle.y - pipSize.height / 2.0 - voffset * self.bounds.size.height);
   [attributedSuit drawAtPoint:pipOrigin];
   if (hoffset) {
-    pipOrigin.x += hoffset*2.0*self.bounds.size.width;
+    pipOrigin.x += hoffset * 2.0 * self.bounds.size.width;
     [attributedSuit drawAtPoint:pipOrigin];
   }
   if (upsideDown) {
@@ -214,6 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
   [self setup];
 }
 

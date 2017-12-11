@@ -11,6 +11,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSUInteger rank;
 @property (strong, nonatomic) NSString *suit;
+
+@property (nonatomic) int color;
+@property (nonatomic) int number;
+@property (nonatomic) int shading;
+@property (nonatomic) int symbol;
+
 @property (nonatomic) BOOL faceUp;
 
 @end
