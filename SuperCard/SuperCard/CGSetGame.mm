@@ -85,10 +85,24 @@ static const int kCostToChoose = 1;
   if (self.pickedCards.count == self.matchMode) {
     if ([self.pickedCards firstObject].matched == NO) {
       [self markCardsChosenSign:card cards:self.pickedCards sign:NO];
+    } else if ([self.pickedCards firstObject].matched == YES) {
+      [self replaceMatchedCardsWithNewCards:self.pickedCards];
     }
-    //for task 3 - if cards are matched, remove them from _cards property
+    
     [self.pickedCards removeAllObjects];
   }
+}
+
+- (void)replaceMatchedCardsWithNewCards:(NSMutableArray <CGCard *>*)matchedCards {
+  for (int i = 0; i < self.matchMode; ++i) {
+    NSUInteger index = [self.cards indexOfObject:matchedCards[i]];
+    if (self.deck.cards.count) {
+      self.cards[index] = [self.deck drawRandomCard];
+      self.cards[index].matched = NO;
+      self.cards[index].chosen = NO;
+    }
+  }
+  NSLog(@"deck cards count is: %lu", (unsigned long)self.deck.cards.count);
 }
 
 - (void)markCardsChosenSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {

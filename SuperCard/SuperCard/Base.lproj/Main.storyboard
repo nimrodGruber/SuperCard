@@ -283,7 +283,6 @@
                         <outletCollection property="setCardViews" destination="kX7-Ve-uf6" id="oAU-hd-i8A"/>
                         <outletCollection property="setCardViews" destination="GZ9-kX-VjF" id="FFR-T8-79f"/>
                         <outletCollection property="setCardViews" destination="swE-SS-zAv" id="YZW-qh-iXG"/>
-                        <outletCollection property="setCardViews" destination="zru-SE-2tg" id="htT-gs-uKk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ohX-cf-cNT" sceneMemberID="firstResponder"/>
