@@ -57,6 +57,19 @@ NS_ASSUME_NONNULL_BEGIN
   card.symbol = ((SetCardView *)tmp).symbol;
 }
 
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  // Do any additional setup after loading the view, typically from a nib.
+  
+  for (SetCardView *view in self.setCardViews) {
+    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
+    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
+  }
+  
+  [self updateUI];
+}
+
+
 @end
 
 NS_ASSUME_NONNULL_END

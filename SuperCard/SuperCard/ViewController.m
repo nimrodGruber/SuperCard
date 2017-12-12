@@ -18,9 +18,6 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) IBOutletCollection(PlayingCardView) NSArray *playingCardViews;
-@property (strong, nonatomic) IBOutletCollection(SetCardView) NSArray *setCardViews;
-
 @property (strong, nonatomic) CGCardGame *game;
 
 @end
@@ -46,18 +43,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-
-  for (PlayingCardView *view in self.playingCardViews) {
-    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
-    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
-  }
-  
-  for (SetCardView *view in self.setCardViews) {
-    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
-    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
-  }
-  
-  [self updateUI];
 }
 
 @end

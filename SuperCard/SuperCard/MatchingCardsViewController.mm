@@ -54,6 +54,18 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  // Do any additional setup after loading the view, typically from a nib.
+  
+  for (PlayingCardView *view in self.playingCardViews) {
+    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
+    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
+  }
+  
+   [self updateUI];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END
