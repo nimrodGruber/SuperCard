@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGCard *)cardAtIndex:(NSUInteger)index;
 - (void)chooseCardAtIndex:(NSUInteger)index;
+- (CGCard *)addCardToGame;
 
+@property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
+@property (nonatomic) NSUInteger addedCardsQuota;
 @end
 
 NS_ASSUME_NONNULL_END

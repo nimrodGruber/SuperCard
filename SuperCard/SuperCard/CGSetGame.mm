@@ -10,21 +10,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGSetGame()
 
-@property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
+//@property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
 @property (strong, nonatomic) CGSetDeck *deck;
 
 @end
 
 @implementation CGSetGame
 
+
 static const int kMismatchPenalty = 2;
 static const int kMatchBonus = 15;
 static const int kCostToChoose = 1;
+static const int kNumOfAdditionalCards = 3;
+
 
 - (nullable instancetype)initWithCardCount:(NSUInteger)count {
   if (self = [super init]) {
     _cards = [[NSMutableArray<CGCard *> alloc] init];
     _deck = [[CGSetDeck alloc] init];
+    _addedCardsQuota = kNumOfAdditionalCards;
     self.matchMode = 3;
     for (NSUInteger i = 0; i < count; ++i) {
       CGCard *card = [self.deck drawRandomCard];
@@ -40,13 +44,28 @@ static const int kCostToChoose = 1;
   return self;
 }
 
+
+- (CGCard *)addCardToGame {
+  CGCard *newCard = nil;
+  
+  if (self.deck.cards.count) {
+    newCard = [self.deck drawRandomCard];
+    [self.cards addObject:newCard];
+  }
+  
+  return newCard;
+}
+
+
 - (CGCard *)cardAtIndex:(NSUInteger)index {
   return (index <= self.cards.count) ? self.cards[index] : nil;
 }
 
+
 - (CGDeck *)getDeck {
   return self.deck;
 }
+
 
 - (void)chooseCardAtIndex:(NSUInteger)index {
   CGCard *card = [self cardAtIndex:index];
@@ -81,6 +100,7 @@ static const int kCostToChoose = 1;
   }
 }
 
+
 - (void)flipAndClearPickedCardsIfNeeded:(CGCard *)card {
   if (self.pickedCards.count == self.matchMode) {
     if ([self.pickedCards firstObject].matched == NO) {
@@ -92,6 +112,7 @@ static const int kCostToChoose = 1;
     [self.pickedCards removeAllObjects];
   }
 }
+
 
 - (void)replaceMatchedCardsWithNewCards:(NSMutableArray <CGCard *>*)matchedCards {
   for (int i = 0; i < self.matchMode; ++i) {
@@ -105,6 +126,7 @@ static const int kCostToChoose = 1;
   NSLog(@"deck cards count is: %lu", (unsigned long)self.deck.cards.count);
 }
 
+
 - (void)markCardsChosenSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {
   for (CGCard *picked in cards) {
     picked.chosen = sign;
@@ -113,6 +135,7 @@ static const int kCostToChoose = 1;
   card.chosen = sign;
 }
 
+
 - (void)markCardsMatchedSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {
   for (CGCard *picked in cards) {
     picked.matched = sign;
@@ -120,6 +143,7 @@ static const int kCostToChoose = 1;
   
   card.matched = sign;
 }
+
 
 - (NSString *)cardToText:(CGCard*)card {
   CGSetCard *setCard = (CGSetCard *)card;
@@ -143,6 +167,7 @@ static const int kCostToChoose = 1;
   
   return textCard;
 }
+
 
 @end
 

@@ -5,17 +5,77 @@
 #import "CGSetDeck.h"
 #import "CGSetGame.h"
 #import "SetCardsViewController.h"
+#import "Grid.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SetCardsViewController ()
 
 @property (strong, nonatomic) CGSetGame *game;
-@property (strong, nonatomic) IBOutletCollection(SetCardView) NSArray *setCardViews;
+@property (strong, nonatomic) Grid *grid;
+@property (strong, nonatomic) IBOutletCollection(SetCardView) NSMutableArray *setCardViews;
+@property (weak, nonatomic) IBOutlet UIView *viewBoundsForCards;
+@property (weak, nonatomic) IBOutlet UIButton *addCardsBtn;
+
 
 @end
 
 @implementation SetCardsViewController
+
+- (IBAction)addCards:(UIButton *)sender {
+  CGCard *newCard = nil;
+  for (int i = 0; i < self.game.addedCardsQuota; ++i) {
+    newCard = [self.game addCardToGame];
+    if (!newCard) {
+      break;
+    } else {
+      SetCardView *newCardView = [[SetCardView alloc] init];
+      [self initializeCardDisplay:newCardView atIndex:self.game.cards.count-1];
+      [self.setCardViews addObject: newCardView];
+      [self.view addSubview:newCardView];
+    }
+  }
+
+  [self.addCardsBtn setImage:[UIImage imageNamed:(newCard) ? @"dealMoreCards" : @"noCardsLeft"]
+                    forState:UIControlStateNormal];
+  
+  [self updateCardDisplay];
+  [self updateUI];
+}
+
+
+- (void)updateCardDisplay {
+  [self setupGridData];
+  NSUInteger i = 0;
+  for (NSUInteger r = 0; r < self.grid.rowCount; ++r) {
+    for (NSUInteger c = 0; c < self.grid.columnCount && i < self.setCardViews.count; ++c, ++i) {
+      ((UIView *)self.setCardViews[(r*self.grid.columnCount)+c]).frame = [self.grid frameOfCellAtRow:r inColumn:c];
+    }
+  }
+}
+
+
+- (void)setupGridData {
+  if (!self.grid) {
+    self.grid = [[Grid alloc] init];
+    self.grid.size = self.viewBoundsForCards.bounds.size;
+    
+    CGFloat goldenRatio = {0.618};
+    self.grid.cellAspectRatio = goldenRatio;
+  }
+  
+  self.grid.minimumNumberOfCells = self.game.cards.count;
+  assert ([self.grid inputsAreValid]);
+}
+
+
+- (void)removeOldViewCards {
+//  for (SetCardView *cardView in self.setCardViews) {
+//    [cardView removeFromSuperview];
+//  }
+//
+////  [self.setCardViews removeAllObjects];
+}
 
 - (CGCardGame *)game {
   if (!_game) {
@@ -69,6 +129,16 @@ NS_ASSUME_NONNULL_BEGIN
   [self updateUI];
 }
 
+- (void)loadView {
+  /// make a empty view to self.view
+  /// after calling [super loadView], self.view won't be nil anymore.
+  [super loadView];
+  
+//  paintView=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 430)];
+//  [paintView setBackgroundColor:[UIColor yellowColor]];
+//  [self.view addSubview:paintView];
+//  [paintView release];
+};
 
 @end
 
