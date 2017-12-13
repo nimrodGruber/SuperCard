@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MatchingCardsViewController
 
+
 - (CGCardMatchingGame *)game {
   if (!_game) {
     _game = [[CGCardMatchingGame alloc] initWithCardCount:self.playingCardViews.count];
@@ -25,10 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
   return _game;
 }
 
+
 - (void)updateUI {
   for (PlayingCardView *cardView in self.playingCardViews) {
     NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
     CGCard *card = [self.game cardAtIndex:cardViewIndex];
+//    if (card.chosen && !card.matched) {
+//      [self flipAnimation:cardView];
+//    }
     card.chosen ? (cardView.faceUp = YES) : (cardView.faceUp = NO);
     card.matched ? (cardView.alpha = 0.5) : (cardView.alpha = 1);
     [cardView updateCardDisplay:((CGPlayingCard *)card).suit rank:((CGPlayingCard *)card).rank];
@@ -36,15 +41,29 @@ NS_ASSUME_NONNULL_BEGIN
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
+
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-    NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
-    PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
-    if ([cardView cardIsNotInitialized]) {
-      [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
-    }
-    [self.game chooseCardAtIndex:chosenButtonIndex];
-    [self updateUI];
+  NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
+  PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
+  if ([cardView cardIsNotInitialized]) {
+    [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
+  }
+  [self.game chooseCardAtIndex:chosenButtonIndex];
+  [self flipAnimation:cardView];
+  [self updateUI];
 }
+
+
+- (void)flipAnimation:(PlayingCardView *)card {
+  [UIView transitionWithView:card duration:0.65f
+                     options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+//                       frontImageView.hidden = NO;
+//                       backImageView.hidden = YES;
+                     } completion:^(BOOL finished) {
+                       // whatever you'd like to do immediately after the flip completes
+                     }];
+}
+
 
 - (void)initializeCardDisplay:(PlayingCardView *)card atIndex:(NSUInteger)index {
   CGCard *tmp = [self.game getCardAtIndex:index];
@@ -53,6 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
     card.suit = ((CGPlayingCard *)tmp).suit;
   }
 }
+
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -65,6 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
   
    [self updateUI];
 }
+
 
 @end
 
