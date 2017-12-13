@@ -132,21 +132,9 @@ NS_ASSUME_NONNULL_BEGIN
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
   
-  [self setup];
-
-  [self updateUI];
-}
-
-
-- (void)setup {
-  
   [self.view addSubview:self.viewBoundsForCards];
-
-  for (SetCardView *view in self.setCardViews) {
-    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
-    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
-    [self.viewBoundsForCards addSubview:view];
-  }
+  [self prepareForNextGame];
+  [self updateUI];
 }
 
 
@@ -157,11 +145,14 @@ NS_ASSUME_NONNULL_BEGIN
   [self.setCardViews removeAllObjects];
   
   self.game = [[CGSetGame alloc] initWithCardCount:12];
+  
   for (int i = 0; i < 12; ++i) {
     [self addNewCardViewItemAtIndex:i];
   }
   
   [self updateCardDisplay];
+  
+  [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
 
 

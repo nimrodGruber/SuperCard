@@ -46,7 +46,7 @@
 }
 
 
-- (void)cleanup { // Abstract.
+- (void)prepareForNextGame { // Abstract.
 }
 
 
