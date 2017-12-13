@@ -31,14 +31,26 @@ NS_ASSUME_NONNULL_BEGIN
   for (PlayingCardView *cardView in self.playingCardViews) {
     NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
     CGCard *card = [self.game cardAtIndex:cardViewIndex];
-//    if (card.chosen && !card.matched) {
-//      [self flipAnimation:cardView];
-//    }
-    card.chosen ? (cardView.faceUp = YES) : (cardView.faceUp = NO);
+    [self flipCardViewIfNeeded:card cardFrame:cardView];
     card.matched ? (cardView.alpha = 0.5) : (cardView.alpha = 1);
     [cardView updateCardDisplay:((CGPlayingCard *)card).suit rank:((CGPlayingCard *)card).rank];
   }
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+}
+
+
+- (void)flipCardViewIfNeeded:(CGCard *)card cardFrame:(PlayingCardView*)cardView {
+  if (card.chosen) {
+    if (cardView.faceUp == NO) {
+      [self flipAnimation:cardView];
+      cardView.faceUp = YES;
+    }
+  } else {
+    if (cardView.faceUp == YES) {
+      [self flipAnimation:cardView];
+      cardView.faceUp = NO;
+    }
+  }
 }
 
 
@@ -56,11 +68,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)flipAnimation:(PlayingCardView *)card {
   [UIView transitionWithView:card duration:0.65f
-                     options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+                     options:UIViewAnimationOptionTransitionFlipFromLeft
+                  animations:^{
 //                       frontImageView.hidden = NO;
 //                       backImageView.hidden = YES;
-                     } completion:^(BOOL finished) {
-                       // whatever you'd like to do immediately after the flip completes
+                     }
+                  completion:^(BOOL finished) {
                      }];
 }
 
