@@ -61,13 +61,12 @@ NS_ASSUME_NONNULL_BEGIN
     [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
   }
   [self.game chooseCardAtIndex:chosenButtonIndex];
-  [self flipAnimation:cardView];
   [self updateUI];
 }
 
 
 - (void)flipAnimation:(PlayingCardView *)card {
-  [UIView transitionWithView:card duration:0.65f
+  [UIView transitionWithView:card duration:0.65
                      options:UIViewAnimationOptionTransitionFlipFromLeft
                   animations:^{
 //                       frontImageView.hidden = NO;

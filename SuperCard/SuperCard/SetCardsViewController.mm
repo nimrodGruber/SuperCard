@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SetCardsViewController ()
 
+
 @property (strong, nonatomic) CGSetGame *game;
 @property (strong, nonatomic) Grid *grid;
 @property (strong, nonatomic) IBOutletCollection(SetCardView) NSMutableArray *setCardViews;
@@ -139,9 +140,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)prepareForNextGame {
-  for (SetCardView *oldCard in self.setCardViews) {
-    [oldCard removeFromSuperview];
-  }
+//  for (SetCardView *oldCard in self.setCardViews) {
+//    [oldCard removeFromSuperview];
+//  }
+  [self departureAnimation];
   [self.setCardViews removeAllObjects];
   
   self.game = [[CGSetGame alloc] initWithCardCount:12];
@@ -153,6 +155,31 @@ NS_ASSUME_NONNULL_BEGIN
   [self updateCardDisplay];
   
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
+}
+
+
+- (void)departureAnimation {
+//  [UIView transitionWithView:cardView
+//                    duration:1.5
+//                     options: UIViewAnimationOptionTransitionCurlDown
+//                  animations:^{
+//                    cardView.frame = CGRectMake(-320, 0, 10, 10);
+//                  }
+//                  completion:^(BOOL finished){
+//                     //animCompleteHandlerCode..
+//                   }
+//   ];
+  [UIView animateWithDuration:3.0
+                   animations:^{
+                     for (SetCardView *oldCard in self.setCardViews) {
+                       int x = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.width * 0.5));
+                       int y = self.viewBoundsForCards.bounds.size.height;
+                       oldCard.center = CGPointMake(x, -y);
+                     }
+                     }
+                   completion:^(BOOL finished) {
+                      [self.setCardViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+                   }];
 }
 
 
