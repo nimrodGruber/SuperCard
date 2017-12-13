@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SetCardsViewController
 
+
 - (IBAction)addCards:(UIButton *)sender {
   CGCard *newCard = nil;
   for (int i = 0; i < self.game.addedCardsQuota; ++i) {
@@ -29,10 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (!newCard) {
       break;
     } else {
-      SetCardView *newCardView = [[SetCardView alloc] init];
-      [self initializeCardDisplay:newCardView atIndex:self.game.cards.count-1];
-      [self.setCardViews addObject: newCardView];
-      [self.view addSubview:newCardView];
+      [self addNewCardViewItemAtIndex:self.game.cards.count-1];
     }
   }
 
@@ -44,12 +42,29 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 
+- (void)addNewCardViewItemAtIndex:(NSUInteger)index {
+  SetCardView *newCardView = [[SetCardView alloc] init];
+  [self initializeCardDisplay:newCardView atIndex:index];
+  [self.setCardViews addObject: newCardView];
+  [self.viewBoundsForCards addSubview:newCardView];
+  [newCardView addGestureRecognizer:[[UISwipeGestureRecognizer alloc]
+                                     initWithTarget:self action:@selector(swipe:)]];
+  [newCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]
+                                     initWithTarget:self action:@selector(pinch:)]];
+}
+
+
 - (void)updateCardDisplay {
+  NSUInteger viewCardsHandeled = 0;
+  NSUInteger existingViewCards = self.setCardViews.count;
+  
   [self setupGridData];
-  NSUInteger i = 0;
+  
   for (NSUInteger r = 0; r < self.grid.rowCount; ++r) {
-    for (NSUInteger c = 0; c < self.grid.columnCount && i < self.setCardViews.count; ++c, ++i) {
-      ((UIView *)self.setCardViews[(r*self.grid.columnCount)+c]).frame = [self.grid frameOfCellAtRow:r inColumn:c];
+    for (NSUInteger c = 0; c < self.grid.columnCount && viewCardsHandeled < existingViewCards;
+         ++c, ++viewCardsHandeled) {
+      ((UIView *)self.setCardViews[(r*self.grid.columnCount)+c]).frame =
+          [self.grid frameOfCellAtRow:r inColumn:c];
     }
   }
 }
@@ -69,14 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 
-- (void)removeOldViewCards {
-//  for (SetCardView *cardView in self.setCardViews) {
-//    [cardView removeFromSuperview];
-//  }
-//
-////  [self.setCardViews removeAllObjects];
-}
-
 - (CGCardGame *)game {
   if (!_game) {
     _game = [[CGSetGame alloc] initWithCardCount:self.setCardViews.count];
@@ -84,6 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   return _game;
 }
+
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
   NSUInteger chosenButtonIndex = [self.setCardViews indexOfObject:sender.view];
@@ -94,6 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
   [self.game chooseCardAtIndex:chosenButtonIndex];
   [self updateUI];
 }
+
 
 - (void)updateUI {
   for (SetCardView *cardView in self.setCardViews) {
@@ -109,6 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
+
 - (void)initializeCardDisplay:(SetCardView *)card atIndex:(NSUInteger)index {
   CGCard *tmp = [self.game getCardAtIndex:index];
   card.color = ((SetCardView *)tmp).color;
@@ -117,28 +127,43 @@ NS_ASSUME_NONNULL_BEGIN
   card.symbol = ((SetCardView *)tmp).symbol;
 }
 
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
   
-  for (SetCardView *view in self.setCardViews) {
-    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
-    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
-  }
-  
+  [self setup];
+
   [self updateUI];
 }
 
-- (void)loadView {
-  /// make a empty view to self.view
-  /// after calling [super loadView], self.view won't be nil anymore.
-  [super loadView];
+
+- (void)setup {
   
-//  paintView=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 430)];
-//  [paintView setBackgroundColor:[UIColor yellowColor]];
-//  [self.view addSubview:paintView];
-//  [paintView release];
-};
+  [self.view addSubview:self.viewBoundsForCards];
+
+  for (SetCardView *view in self.setCardViews) {
+    [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
+    [view addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)]];
+    [self.viewBoundsForCards addSubview:view];
+  }
+}
+
+
+- (void)prepareForNextGame {
+  for (SetCardView *oldCard in self.setCardViews) {
+    [oldCard removeFromSuperview];
+  }
+  [self.setCardViews removeAllObjects];
+  
+  self.game = [[CGSetGame alloc] initWithCardCount:12];
+  for (int i = 0; i < 12; ++i) {
+    [self addNewCardViewItemAtIndex:i];
+  }
+  
+  [self updateCardDisplay];
+}
+
 
 @end
 

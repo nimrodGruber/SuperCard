@@ -24,25 +24,36 @@
 
 @implementation ViewController
 
+
 - (CGCardGame *)game { // Abstract.
   _game = nil;
   return _game;
 }
 
+
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
+  [self prepareForNextGame];
   [self updateUI];
 }
+
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender { // Abstract.
 }
 
+
 - (void)updateUI { // Abstract.
 }
+
+
+- (void)cleanup { // Abstract.
+}
+
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
 }
+
 
 @end

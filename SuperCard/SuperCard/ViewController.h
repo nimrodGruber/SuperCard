@@ -14,6 +14,7 @@
 
 // For subclasses.
 - (void)updateUI; // Abstract.
+- (void)prepareForNextGame; // Abstract.
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;
 
