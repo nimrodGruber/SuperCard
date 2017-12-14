@@ -119,6 +119,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Match" id="E4s-64-XlR"/>
                     <connections>
+                        <outlet property="reDealBtn" destination="NHl-r8-70g" id="VHI-k7-5Kv"/>
                         <outlet property="scoreLable" destination="47y-15-CbB" id="PH8-bQ-sxq"/>
                         <outletCollection property="playingCardViews" destination="SHV-iL-rT6" id="nVT-8B-Fc4"/>
                         <outletCollection property="playingCardViews" destination="J4L-xM-agc" id="tMk-qg-mKJ"/>
@@ -318,6 +319,7 @@
                     <tabBarItem key="tabBarItem" title="Set" id="FPV-3F-Lie"/>
                     <connections>
                         <outlet property="addCardsBtn" destination="XX9-zp-5CC" id="e5S-8j-DZP"/>
+                        <outlet property="reDealBtn" destination="hsG-6n-bIo" id="Wpj-SH-dTh"/>
                         <outlet property="scoreLable" destination="dY3-61-eSA" id="47S-GA-xr1"/>
                         <outlet property="viewBoundsForCards" destination="cmZ-nh-uAu" id="fAW-Zi-hTW"/>
                         <outletCollection property="setCardViews" destination="vK4-Fs-Zkb" collectionClass="NSMutableArray" id="nj0-2P-BrS"/>

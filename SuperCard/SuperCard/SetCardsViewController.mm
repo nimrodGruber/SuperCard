@@ -162,11 +162,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)prepareForNextGame {
-  [self initializeGame];
-  [self newGameAnimation];
+  [self byebyeOldCardsAnimation];
+//  [self initializeGame];
+//  [self newGameAnimation];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
 
+- (void)byebyeOldCardsAnimation {
+  self.addCardsBtn.enabled = NO;
+  [UIView animateWithDuration:3.0
+     animations:^{
+       [self moveViewCardsFromScreenWithAlphaValue:0.0];
+     }
+     completion:^(BOOL finished) {
+       [self.setCardViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+       [self.setCardViews removeAllObjects];
+       [self initializeGame];
+       for (int i = 0; i < 12; ++i) {
+         [self addNewCardViewItemAtIndex:i];
+       }
+       [self moveViewCardsFromScreenWithAlphaValue:1.0];
+       [UIView animateWithDuration:1.0
+          animations:^{
+            [self updateCardDisplay];
+          }
+          completion:^(BOOL finished) {
+            [self updateUI];
+            self.addCardsBtn.enabled = YES;
+          }];
+     }];
+}
 
 - (void)newGameAnimation {
   [UIView animateWithDuration:3.0

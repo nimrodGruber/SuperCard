@@ -18,6 +18,7 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *reDealBtn;
 @property (strong, nonatomic) CGCardGame *game;
 
 @end
@@ -37,8 +38,12 @@
 
 
 - (IBAction)reDeal:(UIButton *)sender {
+  self.reDealBtn.enabled = NO;
+  self.reDealBtn.hidden = YES;
   self.game = nil;
   [self prepareForNextGame];
+  self.reDealBtn.enabled = YES;
+  self.reDealBtn.hidden = NO;
 }
 
 
