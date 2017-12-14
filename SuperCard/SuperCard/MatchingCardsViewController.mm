@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
   return _game;
 }
 
+- (void)prepareForNextGame {
+  [self updateUI];
+}
 
 - (void)updateUI {
   for (PlayingCardView *cardView in self.playingCardViews) {

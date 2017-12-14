@@ -27,6 +27,9 @@
 - (void)initializeGame { // Abstract.
 }
 
+- (void)initializeCardsView { // Abstract.
+}
+
 - (CGCardGame *)game { // Abstract.
   _game = nil;
   return _game;
@@ -35,9 +38,7 @@
 
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
-//  [self initializeGame];
   [self prepareForNextGame];
-  [self updateUI];
 }
 
 

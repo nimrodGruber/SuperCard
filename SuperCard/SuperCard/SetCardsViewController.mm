@@ -52,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
   self.game = [[CGSetGame alloc] initWithCardCount:12];
 }
 
+- (void)initializeCardsView {
+  
+}
 
 - (void)addNewCardViewItemAtIndex:(NSUInteger)index {
   SetCardView *newCardView = [[SetCardView alloc] init];
@@ -62,10 +65,14 @@ NS_ASSUME_NONNULL_BEGIN
                                      initWithTarget:self action:@selector(swipe:)]];
   [newCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]
                                      initWithTarget:self action:@selector(pinch:)]];
-  
   int x = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.width * 2));
   int y = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.height * 2));
-  newCardView.center = CGPointMake(-x, y);
+  int random = arc4random() % 10;
+  if (random % 2 == 0) {
+    newCardView.center = CGPointMake(-x, y);
+  } else {
+    newCardView.center = CGPointMake(x, -y);
+  }
 }
 
 
@@ -142,6 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
+  [self initializeGame];
   [self.view addSubview:self.viewBoundsForCards];
   for (SetCardView *newCardView in self.setCardViews) {
     [newCardView addGestureRecognizer:[[UISwipeGestureRecognizer alloc]
@@ -154,46 +162,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)prepareForNextGame {
-//  [self initializeGame];
-  [self departureAnimation];
+  [self initializeGame];
+  [self newGameAnimation];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
 
 
-- (void)departureAnimation {
+- (void)newGameAnimation {
   [UIView animateWithDuration:3.0
     animations:^{
-      int i = 0;
-      for (SetCardView *oldCard in self.setCardViews) {
-        int x = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.width * 2));
-        int y = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.height * 2));
-        if (i++ % 2) {
-          oldCard.center = CGPointMake(-x, y);
-        } else {
-          oldCard.center = CGPointMake(x, -y);
-        }
-        oldCard.alpha = 0.0;
-      }
+      [self moveViewCardsFromScreenWithAlphaValue:0.0];
     }
     completion:^(BOOL finished) {
       [self.setCardViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
       [self.setCardViews removeAllObjects];
       
-      self.game = [[CGSetGame alloc] initWithCardCount:12];
-      
       for (int i = 0; i < 12; ++i) {
         [self addNewCardViewItemAtIndex:i];
       }
-      int i = 0;
-      for (SetCardView *newCardView in self.setCardViews) {
-        int x = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.width * 2));
-        int y = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.height * 2));
-        if (i++ % 2) {
-          newCardView.center = CGPointMake(-x, y);
-        } else {
-          newCardView.center = CGPointMake(x, -y);
-        }
-      }
+      
+      [self moveViewCardsFromScreenWithAlphaValue:1.0];
+      
       [UIView animateWithDuration:1.0
         animations:^{
           [self updateCardDisplay];
@@ -204,6 +193,19 @@ NS_ASSUME_NONNULL_BEGIN
     }];
 }
 
+- (void)moveViewCardsFromScreenWithAlphaValue:(float)alph {
+  int i = 0;
+  for (SetCardView *newCardView in self.setCardViews) {
+    int x = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.width * 2));
+    int y = (arc4random() % (int)(self.viewBoundsForCards.bounds.size.height * 2));
+    if (i++ % 2) {
+      newCardView.center = CGPointMake(-x, y);
+    } else {
+      newCardView.center = CGPointMake(x, -y);
+    }
+    newCardView.alpha = alph;
+  }
+}
 
 @end
 
