@@ -66,14 +66,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)flipAnimation:(PlayingCardView *)card {
-  [UIView transitionWithView:card duration:0.65
-                     options:UIViewAnimationOptionTransitionFlipFromLeft
-                  animations:^{
-//                       frontImageView.hidden = NO;
-//                       backImageView.hidden = YES;
-                     }
-                  completion:^(BOOL finished) {
-                     }];
+  [UIView transitionWithView:card
+    duration:0.65
+    options:UIViewAnimationOptionTransitionFlipFromLeft
+    animations:^{
+      //frontImageView.hidden = NO;
+      //backImageView.hidden = YES;
+    }
+    completion:^(BOOL finished) {
+    }];
 }
 
 

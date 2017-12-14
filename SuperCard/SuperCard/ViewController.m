@@ -24,6 +24,8 @@
 
 @implementation ViewController
 
+- (void)initializeGame { // Abstract.
+}
 
 - (CGCardGame *)game { // Abstract.
   _game = nil;
@@ -33,6 +35,7 @@
 
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
+//  [self initializeGame];
   [self prepareForNextGame];
   [self updateUI];
 }
