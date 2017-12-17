@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SetCardsViewController ()
 
-
+@property (strong, nonatomic) UIAttachmentBehavior *attachment;
 @property (strong, nonatomic) CGSetGame *game;
 @property (strong, nonatomic) Grid *grid;
 @property (strong, nonatomic) IBOutletCollection(SetCardView) NSMutableArray *setCardViews;
@@ -22,6 +22,67 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @implementation SetCardsViewController
+
+
+- (IBAction)tapToReleaseGatheredCards:(UITapGestureRecognizer *)sender {
+  CGRect deckFrame = CGRectMake(0, 0, ((UIView *)self.setCardViews[1]).frame.size.width,
+                                ((UIView *)self.setCardViews[1]).frame.size.height);
+  
+//  if ( deckFrame.origin.x == ((UIView *)self.setCardViews[1]).frame.origin.x )  {
+    [UIView animateWithDuration:2.0
+      animations:^{
+       [self updateCardDisplay];
+      }
+      completion:^(BOOL finished) {
+      }];
+//  }
+}
+
+
+- (IBAction)pinchGestureCollectCards:(UIPinchGestureRecognizer *)sender {
+  CGRect deckFrame = CGRectMake(0, 0, ((UIView *)self.setCardViews[0]).frame.size.width,
+      ((UIView *)self.setCardViews[0]).frame.size.height);
+  
+  [UIView animateWithDuration:2.0
+     animations:^{
+       for (NSUInteger i = 0; i < self.setCardViews.count; ++i) {
+         ((UIView *)self.setCardViews[i]).frame = deckFrame;
+       }
+     }
+     completion:^(BOOL finished) {
+     }];
+}
+
+
+- (IBAction)panGestureMoveDeck:(UIPanGestureRecognizer *)sender {
+  CGPoint gesturePoint = [sender locationInView:self.view];
+  
+  if (sender.state == UIGestureRecognizerStateBegan) {
+    [self moveGatheredCardsToPoint:gesturePoint];
+  } else if (sender.state == UIGestureRecognizerStateChanged) {
+//    self.attachment.anchorPoint = gesturePoint;
+    [self moveGatheredCardsToPoint:gesturePoint];
+  } else if (sender.state == UIGestureRecognizerStateEnded) {
+    [self moveGatheredCardsToPoint:gesturePoint];
+  }
+}
+
+
+- (void)moveGatheredCardsToPoint:(CGPoint)anchorPoint {
+  CGRect deckFrame = CGRectMake(anchorPoint.x, anchorPoint.y,
+      ((UIView *)self.setCardViews[0]).frame.size.width,
+      ((UIView *)self.setCardViews[0]).frame.size.height);
+  
+  [UIView animateWithDuration:0.5
+    animations:^{
+     for (NSUInteger i = 0; i < self.setCardViews.count; ++i) {
+       ((UIView *)self.setCardViews[i]).frame = deckFrame;
+     }
+    }
+    completion:^(BOOL finished) {
+    }];
+}
+
 
 
 - (IBAction)addCards:(UIButton *)sender {
@@ -93,14 +154,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)setupGridData {
-  if (!self.grid) {
+//  if (!self.grid) {
     self.grid = [[Grid alloc] init];
     self.grid.size = self.viewBoundsForCards.bounds.size;
-    
+  
     CGFloat goldenRatio = {0.618};
     self.grid.cellAspectRatio = goldenRatio;
-  }
-  
+//  }
+
   self.grid.minimumNumberOfCells = self.game.cards.count;
   assert ([self.grid inputsAreValid]);
 }
@@ -145,6 +206,10 @@ NS_ASSUME_NONNULL_BEGIN
   card.symbol = ((SetCardView *)tmp).symbol;
 }
 
+- (void)viewDidLayoutSubviews {
+//  self.grid = nil;
+  [self updateCardDisplay];
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -162,13 +227,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)prepareForNextGame {
-  [self byebyeOldCardsAnimation];
-//  [self initializeGame];
-//  [self newGameAnimation];
+  self.reDealBtn.enabled = NO;
+  self.reDealBtn.hidden = YES;
+  [self replaceOldCardsWithNewOnes];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
 
-- (void)byebyeOldCardsAnimation {
+- (void)replaceOldCardsWithNewOnes {
   self.addCardsBtn.enabled = NO;
   [UIView animateWithDuration:3.0
      animations:^{
@@ -189,6 +254,8 @@ NS_ASSUME_NONNULL_BEGIN
           completion:^(BOOL finished) {
             [self updateUI];
             self.addCardsBtn.enabled = YES;
+            self.reDealBtn.enabled = YES;
+            self.reDealBtn.hidden = NO;
           }];
      }];
 }

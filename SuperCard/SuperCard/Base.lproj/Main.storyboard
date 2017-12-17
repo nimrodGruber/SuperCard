@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,25 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHl-r8-70g">
-                                <rect key="frame" x="16" y="588" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Re-Deal">
-                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="reDeal:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bee-0z-uJs"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47y-15-CbB">
-                                <rect key="frame" x="16" y="20" width="122" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHV-iL-rT6" customClass="PlayingCardView">
-                                <rect key="frame" x="156" y="129" width="64" height="96"/>
+                                <rect key="frame" x="156" y="129" width="63" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -45,7 +30,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cFG-RF-phT" customClass="PlayingCardView">
-                                <rect key="frame" x="236" y="129" width="64" height="96"/>
+                                <rect key="frame" x="235" y="129" width="65" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -57,13 +42,13 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFg-yM-MLY" customClass="PlayingCardView">
-                                <rect key="frame" x="156" y="233" width="64" height="96"/>
+                                <rect key="frame" x="156" y="233" width="63" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwS-iI-xfQ" customClass="PlayingCardView">
-                                <rect key="frame" x="236" y="233" width="64" height="96"/>
+                                <rect key="frame" x="235" y="233" width="65" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -75,13 +60,13 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7D-yY-jAW" customClass="PlayingCardView">
-                                <rect key="frame" x="156" y="337" width="64" height="96"/>
+                                <rect key="frame" x="156" y="337" width="63" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zvr-qe-Rp0" customClass="PlayingCardView">
-                                <rect key="frame" x="236" y="337" width="64" height="96"/>
+                                <rect key="frame" x="235" y="337" width="65" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -93,13 +78,13 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnF-f3-BYN" customClass="PlayingCardView">
-                                <rect key="frame" x="156" y="441" width="64" height="96"/>
+                                <rect key="frame" x="156" y="441" width="63" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ouw-ne-bfT" customClass="PlayingCardView">
-                                <rect key="frame" x="236" y="441" width="64" height="96"/>
+                                <rect key="frame" x="235" y="441" width="65" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -113,6 +98,23 @@
                                     <outletCollection property="gestureRecognizers" destination="gKj-B8-x3t" appends="YES" id="zAL-7Z-t0H"/>
                                 </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47y-15-CbB">
+                                <rect key="frame" x="16" y="20" width="122" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHl-r8-70g">
+                                <rect key="frame" x="297" y="588" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Re-Deal">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reDeal:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bee-0z-uJs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -170,39 +172,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-61-eSA">
-                                <rect key="frame" x="16" y="597" width="122" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-61-eSA">
+                                <rect key="frame" x="16" y="597" width="116" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="116" id="lS5-gY-S5U"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsG-6n-bIo">
-                                <rect key="frame" x="297" y="597" width="62" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Re-Deal">
-                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="reDeal:" destination="G0o-Nn-HdH" eventType="touchUpInside" id="hRL-40-yUF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX9-zp-5CC">
-                                <rect key="frame" x="156" y="560" width="64" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="MoreCards" image="dealMoreCards">
-                                    <color key="titleColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="addCards:" destination="G0o-Nn-HdH" eventType="touchUpInside" id="rlg-Fi-jRs"/>
-                                </connections>
-                            </button>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmZ-nh-uAu">
-                                <rect key="frame" x="16" y="20" width="343" height="532"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmZ-nh-uAu">
+                                <rect key="frame" x="16" y="20" width="343" height="490"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vK4-Fs-Zkb" customClass="SetCardView">
-                                        <rect key="frame" x="139" y="62" width="64" height="96"/>
+                                        <rect key="frame" x="139" y="41" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -211,7 +194,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ckz-V5-VhY" customClass="SetCardView">
-                                        <rect key="frame" x="67" y="166" width="64" height="96"/>
+                                        <rect key="frame" x="67" y="145" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -220,7 +203,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uf-Xj-sKY" customClass="SetCardView">
-                                        <rect key="frame" x="139" y="166" width="64" height="96"/>
+                                        <rect key="frame" x="139" y="145" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -229,7 +212,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Zt-h4-HJm" customClass="SetCardView">
-                                        <rect key="frame" x="67" y="270" width="64" height="96"/>
+                                        <rect key="frame" x="67" y="249" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -238,7 +221,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owS-Vg-SoL" customClass="SetCardView">
-                                        <rect key="frame" x="139" y="270" width="64" height="96"/>
+                                        <rect key="frame" x="139" y="249" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -247,7 +230,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kX7-Ve-uf6" customClass="SetCardView">
-                                        <rect key="frame" x="67" y="374" width="64" height="96"/>
+                                        <rect key="frame" x="67" y="353" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -256,7 +239,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZ9-kX-VjF" customClass="SetCardView">
-                                        <rect key="frame" x="139" y="374" width="64" height="96"/>
+                                        <rect key="frame" x="139" y="353" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -265,7 +248,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sPq-Oj-AR9" customClass="SetCardView">
-                                        <rect key="frame" x="67" y="62" width="64" height="96"/>
+                                        <rect key="frame" x="67" y="41" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -274,7 +257,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zru-SE-2tg" customClass="SetCardView">
-                                        <rect key="frame" x="212" y="62" width="64" height="96"/>
+                                        <rect key="frame" x="212" y="41" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -283,7 +266,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OmI-tY-gnb" customClass="SetCardView">
-                                        <rect key="frame" x="211" y="166" width="64" height="96"/>
+                                        <rect key="frame" x="211" y="145" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -291,17 +274,8 @@
                                             <outletCollection property="gestureRecognizers" destination="i6A-NX-3uj" appends="YES" id="aeM-cQ-Iqa"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lf9-VC-VCE" customClass="SetCardView">
-                                        <rect key="frame" x="211" y="270" width="64" height="96"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="i6A-NX-3uj" appends="YES" id="tyW-WH-tHZ"/>
-                                        </connections>
-                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swE-SS-zAv" customClass="SetCardView">
-                                        <rect key="frame" x="211" y="374" width="64" height="96"/>
+                                        <rect key="frame" x="211" y="353" width="64" height="96"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
@@ -309,12 +283,72 @@
                                             <outletCollection property="gestureRecognizers" destination="i6A-NX-3uj" appends="YES" id="rRz-70-3Mc"/>
                                         </connections>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lf9-VC-VCE" customClass="SetCardView">
+                                        <rect key="frame" x="212" y="249" width="64" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="i6A-NX-3uj" appends="YES" id="tyW-WH-tHZ"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="VDJ-Xc-2hW" appends="YES" id="lP9-Jf-cNY"/>
+                                    <outletCollection property="gestureRecognizers" destination="gGI-fy-1Wd" appends="YES" id="c5F-oG-w7x"/>
+                                </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX9-zp-5CC">
+                                <rect key="frame" x="150" y="534" width="75" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="FCG-Lc-sb9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="OOi-Tq-ffB"/>
+                                    <constraint firstAttribute="width" constant="75" id="roX-VM-Sf3"/>
+                                </constraints>
+                                <state key="normal" title="MoreCards" image="dealMoreCards">
+                                    <color key="titleColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCards:" destination="G0o-Nn-HdH" eventType="touchUpInside" id="rlg-Fi-jRs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsG-6n-bIo">
+                                <rect key="frame" x="303" y="597" width="56" height="21"/>
+                                <state key="normal" title="Re-Deal">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reDeal:" destination="G0o-Nn-HdH" eventType="touchUpInside" id="hRL-40-yUF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="cmZ-nh-uAu" firstAttribute="leading" secondItem="fQF-0F-x5W" secondAttribute="leading" constant="16" id="BHi-y9-Z8O"/>
+                            <constraint firstItem="hsG-6n-bIo" firstAttribute="firstBaseline" secondItem="dY3-61-eSA" secondAttribute="firstBaseline" id="BUr-9A-rr6"/>
+                            <constraint firstItem="XX9-zp-5CC" firstAttribute="top" secondItem="cmZ-nh-uAu" secondAttribute="bottom" constant="24" id="EZs-Nv-dwx"/>
+                            <constraint firstItem="cmZ-nh-uAu" firstAttribute="trailing" secondItem="hsG-6n-bIo" secondAttribute="trailing" id="FAp-V9-apC"/>
+                            <constraint firstItem="dY3-61-eSA" firstAttribute="bottom" secondItem="fQF-0F-x5W" secondAttribute="bottom" id="I3d-yT-3Sq"/>
+                            <constraint firstItem="XX9-zp-5CC" firstAttribute="centerX" secondItem="0lh-ph-Ceb" secondAttribute="centerX" id="Loh-yI-lMt"/>
+                            <constraint firstItem="hsG-6n-bIo" firstAttribute="baseline" secondItem="dY3-61-eSA" secondAttribute="firstBaseline" id="O5c-7c-VGB"/>
+                            <constraint firstItem="dY3-61-eSA" firstAttribute="leading" secondItem="0lh-ph-Ceb" secondAttribute="leadingMargin" id="PDb-FL-eGn"/>
+                            <constraint firstItem="fQF-0F-x5W" firstAttribute="trailing" secondItem="cmZ-nh-uAu" secondAttribute="trailing" constant="16" id="Rdz-P8-OYC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dY3-61-eSA" secondAttribute="trailingMargin" id="S5b-8l-TNs"/>
+                            <constraint firstItem="hsG-6n-bIo" firstAttribute="top" secondItem="dY3-61-eSA" secondAttribute="top" id="jpd-al-8Rr"/>
+                            <constraint firstItem="cmZ-nh-uAu" firstAttribute="leading" secondItem="dY3-61-eSA" secondAttribute="leading" id="u1i-H1-8sx"/>
+                            <constraint firstItem="hsG-6n-bIo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0lh-ph-Ceb" secondAttribute="leadingMargin" id="xlB-NE-1Rh"/>
+                            <constraint firstItem="hsG-6n-bIo" firstAttribute="trailing" secondItem="0lh-ph-Ceb" secondAttribute="trailingMargin" id="yRq-kV-nC5"/>
+                            <constraint firstItem="XX9-zp-5CC" firstAttribute="bottom" secondItem="fQF-0F-x5W" secondAttribute="bottom" id="yzu-rn-U7g"/>
+                            <constraint firstItem="cmZ-nh-uAu" firstAttribute="top" secondItem="fQF-0F-x5W" secondAttribute="top" id="zIp-At-gPV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fQF-0F-x5W"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uf8-Gt-i8S" appends="YES" id="RWV-Y9-kgY"/>
+                            <outletCollection property="gestureRecognizers" destination="VDJ-Xc-2hW" appends="YES" id="cSF-UF-NKD"/>
+                            <outletCollection property="gestureRecognizers" destination="gGI-fy-1Wd" appends="YES" id="TNj-dV-gqM"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="FPV-3F-Lie"/>
                     <connections>
@@ -342,8 +376,23 @@
                         <action selector="swipe:" destination="G0o-Nn-HdH" id="WOm-KY-0Qp"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="uf8-Gt-i8S">
+                    <connections>
+                        <action selector="panGestureMoveDeck:" destination="G0o-Nn-HdH" id="tF3-K7-sAR"/>
+                    </connections>
+                </panGestureRecognizer>
+                <pinchGestureRecognizer id="VDJ-Xc-2hW">
+                    <connections>
+                        <action selector="pinchGestureCollectCards:" destination="G0o-Nn-HdH" id="ehq-sb-Coi"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <tapGestureRecognizer id="gGI-fy-1Wd">
+                    <connections>
+                        <action selector="tapToReleaseGatheredCards:" destination="G0o-Nn-HdH" id="YPD-7L-U11"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="264.80000000000001" y="72.413793103448285"/>
+            <point key="canvasLocation" x="263.19999999999999" y="70.614692653673174"/>
         </scene>
     </scenes>
     <resources>
