@@ -13,9 +13,7 @@
 @interface ViewController : UIViewController
 
 // For subclasses.
-- (void)updateUI; // Abstract.
 - (void)prepareForNextGame; // Abstract.
-- (void)initializeGame; // Abstract.
 - (void)initializeCardsView; // Abstract.
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;

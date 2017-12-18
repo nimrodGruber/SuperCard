@@ -297,6 +297,7 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="VDJ-Xc-2hW" appends="YES" id="lP9-Jf-cNY"/>
                                     <outletCollection property="gestureRecognizers" destination="gGI-fy-1Wd" appends="YES" id="c5F-oG-w7x"/>
+                                    <outletCollection property="gestureRecognizers" destination="uf8-Gt-i8S" appends="YES" id="rrr-AO-o1R"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XX9-zp-5CC">
@@ -345,7 +346,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQF-0F-x5W"/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="uf8-Gt-i8S" appends="YES" id="RWV-Y9-kgY"/>
                             <outletCollection property="gestureRecognizers" destination="VDJ-Xc-2hW" appends="YES" id="cSF-UF-NKD"/>
                             <outletCollection property="gestureRecognizers" destination="gGI-fy-1Wd" appends="YES" id="TNj-dV-gqM"/>
                         </connections>
@@ -353,8 +353,10 @@
                     <tabBarItem key="tabBarItem" title="Set" id="FPV-3F-Lie"/>
                     <connections>
                         <outlet property="addCardsBtn" destination="XX9-zp-5CC" id="e5S-8j-DZP"/>
+                        <outlet property="panProperty" destination="uf8-Gt-i8S" id="sgi-6h-Bjd"/>
                         <outlet property="reDealBtn" destination="hsG-6n-bIo" id="Wpj-SH-dTh"/>
                         <outlet property="scoreLable" destination="dY3-61-eSA" id="47S-GA-xr1"/>
+                        <outlet property="swipeProperty" destination="i6A-NX-3uj" id="yoa-UX-PZg"/>
                         <outlet property="viewBoundsForCards" destination="cmZ-nh-uAu" id="fAW-Zi-hTW"/>
                         <outletCollection property="setCardViews" destination="vK4-Fs-Zkb" collectionClass="NSMutableArray" id="nj0-2P-BrS"/>
                         <outletCollection property="setCardViews" destination="Ckz-V5-VhY" collectionClass="NSMutableArray" id="DD1-ck-PNx"/>

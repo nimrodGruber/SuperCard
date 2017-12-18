@@ -340,8 +340,9 @@ static const float kVerticalIndentationStartPositionFactor = 0.1;
     return NO;
   }
 }
-- (void)updateCardDisplay:(int)color theNumber:(int)number
-                 theShade:(int)shade theSymbol:(int)symbol {
+
+- (void)updateCardDisplay:(int)color theNumber:(int)number theShade:(int)shade
+      theSymbol:(int)symbol {
   self.color = color;
   self.number = number;
   self.shading = shade;

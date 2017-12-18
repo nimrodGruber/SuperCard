@@ -18,16 +18,11 @@
 
 @interface ViewController ()
 
-
 @property (strong, nonatomic) CGCardGame *game;
 
 @end
 
 @implementation ViewController
-
-
-- (void)initializeGame { // Abstract.
-}
 
 - (void)initializeCardsView { // Abstract.
 }
@@ -37,33 +32,20 @@
   return _game;
 }
 
-
 - (IBAction)reDeal:(UIButton *)sender {
   self.game = nil;
   [self prepareForNextGame];
 }
 
-
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender { // Abstract.
 }
 
-
-- (void)updateUI { // Abstract.
-}
-
-
 - (void)prepareForNextGame { // Abstract.
 }
-
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
 }
-
-//- (void)viewWillLayoutSubviews() {
-//  
-//}
-
 
 @end

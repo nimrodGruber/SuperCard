@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutletCollection(SetCardView) NSMutableArray *setCardViews;
 @property (weak, nonatomic) IBOutlet UIView *viewBoundsForCards;
 @property (weak, nonatomic) IBOutlet UIButton *addCardsBtn;
-
+@property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panProperty;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeProperty;
 
 @end
 
@@ -25,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (IBAction)tapToReleaseGatheredCards:(UITapGestureRecognizer *)sender {
-  CGRect deckFrame = CGRectMake(0, 0, ((UIView *)self.setCardViews[1]).frame.size.width,
-                                ((UIView *)self.setCardViews[1]).frame.size.height);
+//  CGRect deckFrame = CGRectMake(0, 0, ((UIView *)self.setCardViews[1]).frame.size.width,
+//                                ((UIView *)self.setCardViews[1]).frame.size.height);
   
-//  if ( deckFrame.origin.x == ((UIView *)self.setCardViews[1]).frame.origin.x )  {
+//  if ( deckFrame.origin.x != ((UIView *)self.setCardViews[1]).frame.origin.x )  {
     [UIView animateWithDuration:2.0
       animations:^{
        [self updateCardDisplay];
@@ -55,14 +56,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (IBAction)panGestureMoveDeck:(UIPanGestureRecognizer *)sender {
-  CGPoint gesturePoint = [sender locationInView:self.view];
+  [self.panProperty requireGestureRecognizerToFail:self.swipeProperty];
   
-  if (sender.state == UIGestureRecognizerStateBegan) {
-    [self moveGatheredCardsToPoint:gesturePoint];
-  } else if (sender.state == UIGestureRecognizerStateChanged) {
-//    self.attachment.anchorPoint = gesturePoint;
-    [self moveGatheredCardsToPoint:gesturePoint];
-  } else if (sender.state == UIGestureRecognizerStateEnded) {
+  CGPoint gesturePoint = [sender locationInView:self.view];
+
+  if ((sender.state == UIGestureRecognizerStateBegan) ||
+     (sender.state == UIGestureRecognizerStateChanged) ||
+     (sender.state == UIGestureRecognizerStateEnded)) {
     [self moveGatheredCardsToPoint:gesturePoint];
   }
 }
