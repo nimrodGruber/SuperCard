@@ -14,7 +14,6 @@
 
 // For subclasses.
 - (void)prepareForNextGame; // Abstract.
-- (void)initializeCardsView; // Abstract.
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;
 @property (weak, nonatomic) IBOutlet UIButton *reDealBtn;

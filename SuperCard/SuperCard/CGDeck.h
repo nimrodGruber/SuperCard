@@ -9,7 +9,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addCard:(CGCard *)card;
 - (void)addCard:(CGCard *)card atTop:(BOOL)atTop;
-
 - (CGCard *)drawRandomCard;
 
 @property (strong, nonatomic) NSMutableArray *cards; // Of CGCard.

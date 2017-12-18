@@ -108,7 +108,6 @@ static const int kThreeMatchBonus = 10;
   return _suit ? _suit : @"?";
 }
 
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,16 +17,14 @@ static const int kMaxSetCardFeatures = 3;
         for (int shadingNum = 0; shadingNum < kMaxSetCardFeatures; ++shadingNum) {
           for (int symbolNum = 0; symbolNum < kMaxSetCardFeatures; ++symbolNum) {
             CGSetCard *card = [[CGSetCard alloc] initWithCardColor:colorNum
-                                                   usingNumberType:numberNum
-                                                    usingShadeType:shadingNum
-                                                   usingSymbolType:symbolNum];
+                usingNumberType:numberNum usingShadeType:shadingNum usingSymbolType:symbolNum];
             [self addCard:card];
           }
         }
       }
     }
   }
-NSLog(@"deck cards count is: %lu", (unsigned long)self.cards.count);
+  NSLog(@"deck cards count is: %lu", (unsigned long)self.cards.count);
   return self;
 }
 

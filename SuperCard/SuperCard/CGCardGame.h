@@ -9,7 +9,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGCard *)cardAtIndex:(NSUInteger)index; // Abstract.
 - (void)chooseCardAtIndex:(NSUInteger)index; // Abstract.
-
 - (CGDeck *)getDeck; // Abstract.
 - (CGCard *) getCardAtIndex:(NSUInteger) index; //Abstract.
 

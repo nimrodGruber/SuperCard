@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation MatchingCardsViewController
 
-
 - (CGCardMatchingGame *)game {
   if (!_game) {
     _game = [[CGCardMatchingGame alloc] initWithCardCount:self.playingCardViews.count];
@@ -41,7 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
-
 - (void)flipCardViewIfNeeded:(CGCard *)card cardFrame:(PlayingCardView*)cardView {
   if (card.chosen) {
     if (cardView.faceUp == NO) {
@@ -56,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
-
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
   NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
   PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
@@ -67,7 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
   [self updateUI];
 }
 
-
 - (void)flipAnimation:(PlayingCardView *)card {
   [UIView transitionWithView:card
     duration:0.65
@@ -76,7 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
     completion:^(BOOL finished) {}];
 }
 
-
 - (void)initializeCardDisplay:(PlayingCardView *)card atIndex:(NSUInteger)index {
   CGCard *tmp = [self.game getCardAtIndex:index];
   if ([tmp isKindOfClass:[CGPlayingCard class]]) {
@@ -84,7 +79,6 @@ NS_ASSUME_NONNULL_BEGIN
     card.suit = ((CGPlayingCard *)tmp).suit;
   }
 }
-
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -97,7 +91,6 @@ NS_ASSUME_NONNULL_BEGIN
   
    [self updateUI];
 }
-
 
 @end
 

@@ -356,7 +356,7 @@
                         <outlet property="panProperty" destination="uf8-Gt-i8S" id="sgi-6h-Bjd"/>
                         <outlet property="reDealBtn" destination="hsG-6n-bIo" id="Wpj-SH-dTh"/>
                         <outlet property="scoreLable" destination="dY3-61-eSA" id="47S-GA-xr1"/>
-                        <outlet property="swipeProperty" destination="i6A-NX-3uj" id="yoa-UX-PZg"/>
+                        <outlet property="swipeProperty" destination="i6A-NX-3uj" id="757-Pi-IgL"/>
                         <outlet property="viewBoundsForCards" destination="cmZ-nh-uAu" id="fAW-Zi-hTW"/>
                         <outletCollection property="setCardViews" destination="vK4-Fs-Zkb" collectionClass="NSMutableArray" id="nj0-2P-BrS"/>
                         <outletCollection property="setCardViews" destination="Ckz-V5-VhY" collectionClass="NSMutableArray" id="DD1-ck-PNx"/>

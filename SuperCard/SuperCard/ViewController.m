@@ -24,9 +24,6 @@
 
 @implementation ViewController
 
-- (void)initializeCardsView { // Abstract.
-}
-
 - (CGCardGame *)game { // Abstract.
   _game = nil;
   return _game;
