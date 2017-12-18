@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (IBAction)addCards:(UIButton *)sender {
   CGCard *newCard = nil;
+  [self disableReDealBtn];
   for (int i = 0; i < self.game.addedCardsQuota; ++i) {
     newCard = [self.game addCardToGame];
     if (!newCard) {
@@ -59,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
   
   [UIView animateWithDuration:1.0
     animations:^{
-      [self disableReDealBtn];
+//      [self disableReDealBtn];
       [self updateCardDisplay];
     }
     completion:^(BOOL finished) {
@@ -78,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addNewCardViewItemAtIndex:(NSUInteger)index {
   SetCardView *newCardView = [[SetCardView alloc] init];
   [self initializeCardDisplay:newCardView atIndex:index];
-  [self.setCardViews addObject: newCardView];
+  [self.setCardViews addObject:newCardView];
   [self.viewBoundsForCards addSubview:newCardView];
   [self addGesturesToCardView:newCardView];
   [self placeCardViewRandomlyOnScreen:newCardView];
