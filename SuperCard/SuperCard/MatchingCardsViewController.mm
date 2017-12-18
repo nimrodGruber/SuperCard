@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)prepareForNextGame {
+  self.game = [[CGCardMatchingGame alloc] initWithCardCount:self.playingCardViews.count];
   [self updateUI];
 }
 

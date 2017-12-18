@@ -30,7 +30,6 @@
 }
 
 - (IBAction)reDeal:(UIButton *)sender {
-  self.game = nil;
   [self prepareForNextGame];
 }
 

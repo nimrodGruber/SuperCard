@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *viewBoundsForCards;
 @property (weak, nonatomic) IBOutlet UIButton *addCardsBtn;
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panProperty;
+@property (nonatomic) CGRect previousBounds;
 
 @end
 
@@ -60,7 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
   
   [UIView animateWithDuration:1.0
     animations:^{
-//      [self disableReDealBtn];
       [self updateCardDisplay];
     }
     completion:^(BOOL finished) {
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+      shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
   if ([gestureRecognizer isEqual:self.panProperty] && [otherGestureRecognizer isKindOfClass:UISwipeGestureRecognizer.class]) {
     return YES;
   }
@@ -166,7 +166,6 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 }
 
 - (void)prepareForNextGame {
-  [self initializeGame];
   [self replaceOldCardsWithNewOnes];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
@@ -181,7 +180,7 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
     completion:^(BOOL finished) {
       [self.setCardViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
       [self.setCardViews removeAllObjects];
-//      [self initializeGame];
+      [self initializeGame];
       for (int i = 0; i < 12; ++i) {
         [self addNewCardViewItemAtIndex:i];
       }
@@ -253,7 +252,12 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 }
 
 - (void)viewDidLayoutSubviews {
-  [self updateCardDisplay];
+  [super viewDidLayoutSubviews];
+  
+  if (!CGRectEqualToRect(self.previousBounds, self.view.bounds)) {
+    [self updateCardDisplay];
+  }
+  self.previousBounds = self.view.bounds;
 }
 
 - (void)viewDidLoad {
@@ -267,6 +271,7 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
     [self addGesturesToCardView:newCardView];
   }
   [self updateUI];
+  self.previousBounds = CGRectZero;
 }
 
 @end
