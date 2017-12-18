@@ -24,7 +24,7 @@ static const int kMaxSetCardFeatures = 3;
       }
     }
   }
-  NSLog(@"deck cards count is: %lu", (unsigned long)self.cards.count);
+  NSLog(@"\n\ndeck cards count is: %lu\n\n", (unsigned long)self.cards.count);
   return self;
 }
 

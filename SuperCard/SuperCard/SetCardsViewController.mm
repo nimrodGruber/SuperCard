@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetCardsViewController ()
+@interface SetCardsViewController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIAttachmentBehavior *attachment;
 @property (strong, nonatomic) CGSetGame *game;
@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *viewBoundsForCards;
 @property (weak, nonatomic) IBOutlet UIButton *addCardsBtn;
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panProperty;
-@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeProperty;
 
 @end
 
@@ -95,6 +94,14 @@ NS_ASSUME_NONNULL_BEGIN
   self.reDealBtn.hidden = NO;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+  if ([gestureRecognizer isEqual:self.panProperty] && [otherGestureRecognizer isKindOfClass:UISwipeGestureRecognizer.class]) {
+    return YES;
+  }
+  return NO;
+}
+
 - (void)moveGatheredCardsToPoint:(CGPoint)anchorPoint {
   CGRect deckFrame = CGRectMake(anchorPoint.x, anchorPoint.y,
       ((UIView *)self.setCardViews[0]).frame.size.width,
@@ -137,7 +144,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (IBAction)panGestureMoveDeck:(UIPanGestureRecognizer *)sender {
-  [self.panProperty requireGestureRecognizerToFail:self.swipeProperty];
   CGPoint gesturePoint = [sender locationInView:self.view];
 
   if ((sender.state == UIGestureRecognizerStateBegan) ||
@@ -159,13 +165,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)prepareForNextGame {
-  self.reDealBtn.enabled = NO;
-  self.reDealBtn.hidden = YES;
   [self replaceOldCardsWithNewOnes];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
 
 - (void)replaceOldCardsWithNewOnes {
+  [self disableReDealBtn];
   self.addCardsBtn.enabled = NO;
   [UIView animateWithDuration:3.0
     animations:^{
@@ -186,8 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
         completion:^(BOOL finished) {
           [self updateUI];
           self.addCardsBtn.enabled = YES;
-          self.reDealBtn.enabled = YES;
-          self.reDealBtn.hidden = NO;
+          [self enableReDealBtn];
         }];
     }];
 }
@@ -252,6 +256,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.panProperty.delegate = self;
+
   // Do any additional setup after loading the view, typically from a nib.
   [self initializeGame];
   [self.view addSubview:self.viewBoundsForCards];
