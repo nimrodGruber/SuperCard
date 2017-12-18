@@ -257,7 +257,6 @@
                                 <rect key="frame" x="150" y="534" width="75" height="84"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="84" id="FCG-Lc-sb9"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="OOi-Tq-ffB"/>
                                     <constraint firstAttribute="width" constant="75" id="roX-VM-Sf3"/>
                                 </constraints>
                                 <state key="normal" title="MoreCards" image="dealMoreCards">
@@ -282,7 +281,6 @@
                         <constraints>
                             <constraint firstItem="cmZ-nh-uAu" firstAttribute="leading" secondItem="fQF-0F-x5W" secondAttribute="leading" constant="16" id="BHi-y9-Z8O"/>
                             <constraint firstItem="hsG-6n-bIo" firstAttribute="firstBaseline" secondItem="dY3-61-eSA" secondAttribute="firstBaseline" id="BUr-9A-rr6"/>
-                            <constraint firstItem="XX9-zp-5CC" firstAttribute="top" secondItem="cmZ-nh-uAu" secondAttribute="bottom" constant="24" id="EZs-Nv-dwx"/>
                             <constraint firstItem="cmZ-nh-uAu" firstAttribute="trailing" secondItem="hsG-6n-bIo" secondAttribute="trailing" id="FAp-V9-apC"/>
                             <constraint firstItem="dY3-61-eSA" firstAttribute="bottom" secondItem="fQF-0F-x5W" secondAttribute="bottom" id="I3d-yT-3Sq"/>
                             <constraint firstItem="XX9-zp-5CC" firstAttribute="centerX" secondItem="0lh-ph-Ceb" secondAttribute="centerX" id="Loh-yI-lMt"/>
@@ -291,7 +289,9 @@
                             <constraint firstItem="fQF-0F-x5W" firstAttribute="trailing" secondItem="cmZ-nh-uAu" secondAttribute="trailing" constant="16" id="Rdz-P8-OYC"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dY3-61-eSA" secondAttribute="trailingMargin" id="S5b-8l-TNs"/>
                             <constraint firstItem="hsG-6n-bIo" firstAttribute="top" secondItem="dY3-61-eSA" secondAttribute="top" id="jpd-al-8Rr"/>
+                            <constraint firstItem="fQF-0F-x5W" firstAttribute="bottom" secondItem="cmZ-nh-uAu" secondAttribute="bottom" constant="108" id="rbc-Mp-eph"/>
                             <constraint firstItem="cmZ-nh-uAu" firstAttribute="leading" secondItem="dY3-61-eSA" secondAttribute="leading" id="u1i-H1-8sx"/>
+                            <constraint firstItem="cmZ-nh-uAu" firstAttribute="centerX" secondItem="0lh-ph-Ceb" secondAttribute="centerX" id="uoD-v1-dmz"/>
                             <constraint firstItem="hsG-6n-bIo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0lh-ph-Ceb" secondAttribute="leadingMargin" id="xlB-NE-1Rh"/>
                             <constraint firstItem="hsG-6n-bIo" firstAttribute="trailing" secondItem="0lh-ph-Ceb" secondAttribute="trailingMargin" id="yRq-kV-nC5"/>
                             <constraint firstItem="XX9-zp-5CC" firstAttribute="bottom" secondItem="fQF-0F-x5W" secondAttribute="bottom" id="yzu-rn-U7g"/>

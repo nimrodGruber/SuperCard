@@ -165,6 +165,7 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 }
 
 - (void)prepareForNextGame {
+  [self initializeGame];
   [self replaceOldCardsWithNewOnes];
   [self.addCardsBtn setImage:[UIImage imageNamed:@"dealMoreCards"] forState:UIControlStateNormal];
 }
@@ -179,7 +180,7 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
     completion:^(BOOL finished) {
       [self.setCardViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
       [self.setCardViews removeAllObjects];
-      [self initializeGame];
+//      [self initializeGame];
       for (int i = 0; i < 12; ++i) {
         [self addNewCardViewItemAtIndex:i];
       }
@@ -207,21 +208,6 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
   assert ([self.grid inputsAreValid]);
 }
 
-- (void)updateCardDisplay {
-  NSUInteger viewCardsHandeled = 0;
-  NSUInteger existingViewCards = self.setCardViews.count;
-  
-  [self setupGridData];
-  
-  for (NSUInteger r = 0; r < self.grid.rowCount; ++r) {
-    for (NSUInteger c = 0; c < self.grid.columnCount && viewCardsHandeled < existingViewCards;
-         ++c, ++viewCardsHandeled) {
-      ((UIView *)self.setCardViews[(r*self.grid.columnCount)+c]).frame =
-          [self.grid frameOfCellAtRow:r inColumn:c];
-    }
-  }
-}
-
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
   NSUInteger chosenButtonIndex = [self.setCardViews indexOfObject:sender.view];
   [self.game chooseCardAtIndex:chosenButtonIndex];
@@ -234,6 +220,21 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
      [self updateCardDisplay];
     }
     completion:^(BOOL finished) {}];
+}
+
+- (void)updateCardDisplay {
+  NSUInteger viewCardsHandeled = 0;
+  NSUInteger existingViewCards = self.setCardViews.count;
+  
+  [self setupGridData];
+  
+  for (NSUInteger r = 0; r < self.grid.rowCount; ++r) {
+    for (NSUInteger c = 0; c < self.grid.columnCount && viewCardsHandeled < existingViewCards;
+         ++c, ++viewCardsHandeled) {
+      ((UIView *)self.setCardViews[(r*self.grid.columnCount)+c]).frame =
+      [self.grid frameOfCellAtRow:r inColumn:c];
+    }
+  }
 }
 
 - (void)updateUI {
