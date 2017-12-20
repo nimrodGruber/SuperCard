@@ -28,9 +28,7 @@ typedef enum {
   undefinedSymbol
 } SymbolType;
 
-- (instancetype)initWithCardColor:(int)color
-                  usingNumberType:(int)number
-                   usingShadeType:(int)shade
+- (instancetype)initWithCardColor:(int)color usingNumberType:(int)number usingShadeType:(int)shade
                   usingSymbolType:(int)symbol;
 
 @property (nonatomic) ColorType color;

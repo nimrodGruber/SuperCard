@@ -5,15 +5,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGCard : NSObject
 
-- (int)match:(NSArray *)otherCards;
+- (int)matchTwoCards:(NSArray<CGCard *> *)otherCards; // Abstract.
+- (int)matchThreeCards:(NSArray<CGCard *> *)otherCards; // Abstract.
 
 @property (nonatomic) BOOL chosen;
 @property (strong, nonatomic) NSString *contents;
 @property (nonatomic) BOOL matched;
-
-- (int)match:(NSArray *)otherCards matchMethod:(NSUInteger)matchMethod; // Abstract.
-- (int)matchTwoCards:(NSArray *)otherCards; // Abstract.
-- (int)matchThreeCards:(NSArray *)otherCards; // Abstract.
 
 @end
 

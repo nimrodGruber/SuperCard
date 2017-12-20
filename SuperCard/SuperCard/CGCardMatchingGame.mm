@@ -2,6 +2,7 @@
 // Created by nimrod gruber.
 
 #import "CGCardMatchingGame.h"
+
 #import "CGPlayingCardDeck.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,13 +25,17 @@ static const int kCostToChoose = 1;
     _cards = [[NSMutableArray<CGCard *> alloc] init];
     _deck = [[CGPlayingCardDeck alloc] init];
     self.matchMode = 2;
-    for (NSUInteger i = 0; i < count; ++i) {
-      CGCard *card = [self.deck drawRandomCard];
-      if (card) {
-        [self.cards addObject:card];
-      } else {
-        self = nil;
-        break;
+    if (count > self.deck.cards.count) { // Early bail.
+      return nil;
+    } else {
+      for (NSUInteger i = 0; i < count; ++i) {
+        CGCard *card = [self.deck drawRandomCard];
+        if (card) {
+          [self.cards addObject:card];
+        } else {
+          self = nil;
+          break;
+        }
       }
     }
   }
@@ -51,7 +56,9 @@ static const int kCostToChoose = 1;
     return;
   } else if (card.chosen) {
     card.chosen = NO;
-    [self.pickedCards removeObject:card];
+    NSMutableArray *pickedCardsCopy = [self.pickedCards mutableCopy];
+    [pickedCardsCopy removeObject:card];
+    self.pickedCards = pickedCardsCopy;
   } else {
     card.chosen = YES;
   
@@ -74,7 +81,7 @@ static const int kCostToChoose = 1;
       }
     }
   
-    [self.pickedCards addObject:card];
+    self.pickedCards = [self.pickedCards arrayByAddingObject:card];
   
     self.score -= kCostToChoose;
   }
@@ -82,30 +89,27 @@ static const int kCostToChoose = 1;
 
 - (void)flipAndClearPickedCardsIfNeeded:(CGCard *)card {
   if (self.pickedCards.count == self.matchMode) {
-    if ([self.pickedCards firstObject].matched == NO) {
-      [self markCardsChosenSign:card cards:self.pickedCards sign:NO];
+    if (self.pickedCards.firstObject.matched == NO) {
+      NSArray *cardsArrayToMark = [[NSArray alloc] initWithArray:self.pickedCards];
+      cardsArrayToMark = [cardsArrayToMark arrayByAddingObject:card];
+      [self markCards:(NSArray<CGCard *> *)cardsArrayToMark accordingToSign:(BOOL)NO];
     }
-    [self.pickedCards removeAllObjects];
+    NSArray *emptyPickedCards = [[NSArray alloc] init];
+    self.pickedCards = emptyPickedCards;
   }
-}
-
-- (CGDeck *)getDeck {
-  return self.deck;
 }
 
 - (CGCard *) getCardAtIndex:(NSUInteger) index {
   return self.cards[index];
 }
 
-- (void)markCardsChosenSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {
+- (void)markCards:(NSArray<CGCard *> *)cards accordingToSign:(BOOL)sign {
   for (CGCard *picked in cards) {
     picked.chosen = sign;
   }
-  
-  card.chosen = sign;
 }
 
-- (void)markCardsMatchedSign:(CGCard *)card cards:(NSMutableArray *)cards sign:(BOOL)sign {
+- (void)markCardsMatchedSign:(CGCard *)card cards:(NSArray<CGCard *> *)cards sign:(BOOL)sign {
   for (CGCard *picked in cards) {
     picked.matched = sign;
   }

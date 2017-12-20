@@ -1,8 +1,8 @@
 // Copyright (c) 2017 Lightricks. All rights reserved.
 // Created by nimrod gruber.
 
-#import "ViewController.h"
 #import "PlayingCardView.h"
+#import "ViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

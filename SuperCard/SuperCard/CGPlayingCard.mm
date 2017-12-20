@@ -13,8 +13,11 @@ static const int kRankMatchScore = 4;
 static const int kSuitMatchScore = 1;
 static const int kThreeMatchBonus = 10;
 
-- (instancetype)init {
+- (instancetype)initWithValues:(NSUInteger)rank suit:(NSString *)suit {
   if (self = [super init]) {
+    _rank = rank;
+    _suit = suit;
+  } else {
     _rank = 0;
     _suit = @"?";
   }
@@ -22,20 +25,17 @@ static const int kThreeMatchBonus = 10;
   return self;
 }
 
-- (int)matchTwoCards:(NSMutableArray *)otherCards {
+- (int)matchTwoCards:(NSArray<CGPlayingCard *> *)otherCards {
   int score = 0;
   int matchCount =0;
-  
-  id card = [otherCards firstObject];
-  if ([card isKindOfClass:[CGPlayingCard class]]) {
-    for (CGPlayingCard *card in otherCards) {
-      if (self.rank == card.rank) {
-        score += kRankMatchScore;
-        matchCount += 1;
-      } else if ([self.suit isEqualToString:card.suit]) {
-        score += kSuitMatchScore;
-        matchCount += 1;
-      }
+
+  for (CGPlayingCard *card in otherCards) {
+    if (self.rank == card.rank) {
+      score += kRankMatchScore;
+      matchCount += 1;
+    } else if ([self.suit isEqualToString:card.suit]) {
+      score += kSuitMatchScore;
+      matchCount += 1;
     }
   }
   
@@ -48,9 +48,9 @@ static const int kThreeMatchBonus = 10;
   return [rankStrings[static_cast<unsigned long long>(self.rank)] stringByAppendingString:self.suit];
 }
 
-- (int)matchThreeCards:(NSMutableArray *)otherCards {
+- (int)matchThreeCards:(NSArray<CGPlayingCard *> *)otherCards {
   int score = 0;
-  int matchCount =0;
+  int matchCount = 0;
   
   for (CGPlayingCard *card in otherCards) {
     if (self.rank == card.rank) {
@@ -62,8 +62,8 @@ static const int kThreeMatchBonus = 10;
     }
   }
   
-  CGPlayingCard *first = [otherCards firstObject];
-  CGPlayingCard *second = [otherCards lastObject];
+  CGPlayingCard *first = otherCards.firstObject;
+  CGPlayingCard *second = otherCards.lastObject;
   
   if (first.rank == second.rank) {
     score += kRankMatchScore;
@@ -81,14 +81,14 @@ static const int kThreeMatchBonus = 10;
 }
 
 + (NSUInteger)maxRank {
-  return [[self rankStrings] count] -1;
+  return [self rankStrings].count - 1;
 }
 
-+ (NSArray *)rankStrings {
++ (NSArray<NSString *> *)rankStrings {
   return @[@"?", @"A", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"J", @"Q", @"K"];
 }
 
-+ (NSArray *)validSuits {
++ (NSArray<NSString *> *)validSuits {
   return @[@"♠️", @"♣️", @"♥️", @"♦️"];
 }
 

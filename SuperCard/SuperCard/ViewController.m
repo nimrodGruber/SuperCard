@@ -6,15 +6,14 @@
 //  Copyright © 2017 Lightricks. All rights reserved.
 //
 
-#import "CGCardGame.h"
-
-#import "CGPlayingCardDeck.h"
-#import "CGPlayingCard.h"
-
-#import "CGSetDeck.h"
-#import "CGSetCard.h"
-
 #import "ViewController.h"
+
+#import "CGCardGame.h"
+#import "CGPlayingCard.h"
+#import "CGPlayingCardDeck.h"
+#import "CGSetCard.h"
+#import "CGSetDeck.h"
+
 
 @interface ViewController ()
 

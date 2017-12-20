@@ -1,8 +1,9 @@
 // Copyright (c) 2017 Lightricks. All rights reserved.
 // Created by nimrod gruber.
 
-#import "CGSetCard.h"
 #import "CGSetDeck.h"
+
+#import "CGSetCard.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,14 +18,16 @@ static const int kMaxSetCardFeatures = 3;
         for (int shadingNum = 0; shadingNum < kMaxSetCardFeatures; ++shadingNum) {
           for (int symbolNum = 0; symbolNum < kMaxSetCardFeatures; ++symbolNum) {
             CGSetCard *card = [[CGSetCard alloc] initWithCardColor:colorNum
-                usingNumberType:numberNum usingShadeType:shadingNum usingSymbolType:symbolNum];
+                                                   usingNumberType:numberNum
+                                                    usingShadeType:shadingNum
+                                                   usingSymbolType:symbolNum];
             [self addCard:card];
           }
         }
       }
     }
   }
-  NSLog(@"\n\ndeck cards count is: %lu\n\n", (unsigned long)self.cards.count);
+  
   return self;
 }
 

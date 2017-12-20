@@ -8,10 +8,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CGDeck : NSObject
 
 - (void)addCard:(CGCard *)card;
-- (void)addCard:(CGCard *)card atTop:(BOOL)atTop;
-- (CGCard *)drawRandomCard;
+- (nullable CGCard *)drawRandomCard;
 
-@property (strong, nonatomic) NSMutableArray *cards; // Of CGCard.
+@property (readonly, strong, nonatomic) NSArray<CGCard *> *cards;
 
 @end
 

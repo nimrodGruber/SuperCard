@@ -38,43 +38,43 @@ static const int kMaxNumberAttributes = 4;
   return self;
 }
 
-- (int)matchThreeCards:(NSMutableArray *)otherCards {
+- (int)matchThreeCards:(NSArray<CGSetCard *> *)otherCards {
   BOOL cardsAreLegalSet = NO;
-  CGSetCard *first = [otherCards firstObject];
-  CGSetCard *second = [otherCards lastObject];
+  CGSetCard *first = otherCards.firstObject;
+  CGSetCard *second = otherCards.lastObject;
   NSMutableArray *cards = [[NSMutableArray alloc] init];
   
   [cards addObject:first];
   [cards addObject:second];
   [cards addObject:self];
   
-  if ( (([self allNumbersAreEqual:cards]) || ([self allNumbersAreDifferent:cards])) &&
-       (([self allSymbolAreEqual:cards])  || ([self allSymbolAreDifferent:cards]))  &&
-       (([self allShadingAreEqual:cards]) || ([self allShadingAreDifferent:cards]))  &&
-       (([self allColorsAreEqual:cards])  || ([self allColorsAreDifferent:cards]))  ) {
+  if ((([self allNumbersAreEqual:cards]) || ([self allNumbersAreDifferent:cards])) &&
+      (([self allSymbolAreEqual:cards])  || ([self allSymbolAreDifferent:cards])) &&
+      (([self allShadingAreEqual:cards]) || ([self allShadingAreDifferent:cards])) &&
+      (([self allColorsAreEqual:cards])  || ([self allColorsAreDifferent:cards]))) {
     cardsAreLegalSet = YES;
   }
 
   return cardsAreLegalSet;
 }
 
--(BOOL)areAllIntsEqual:(int)first second:(int)second third:(int)third {
-  if ((first == second) && (first == third)) {
-    return YES;
-  } else {
-    return NO;
-  }
+//static BOOL areAllIntsEqual(int first, int second, int third) {
+//  if ((first == second) && (first == third)) {
+//    return YES;
+//  } else {
+//    return NO;
+//  }
+//}
+
+- (BOOL)areAllIntsEqual:(int)first second:(int)second third:(int)third {
+  return ((first == second) && (first == third));
 }
 
--(BOOL)areAllIntsDifferent:(int)first second:(int)second third:(int)third {
-  if ((first != second) && (first != third) && (second != third)) {
-    return YES;
-  } else {
-    return NO;
-  }
+- (BOOL)areAllIntsDifferent:(int)first second:(int)second third:(int)third {
+  return (first != second) && (first != third) && (second != third);
 }
 
-- (BOOL)allNumbersAreEqual:(NSMutableArray *)cards {
+- (BOOL)allNumbersAreEqual:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -82,7 +82,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsEqual:first.number second:second.number third:third.number];
 }
 
-- (BOOL)allNumbersAreDifferent:(NSMutableArray *)cards {
+- (BOOL)allNumbersAreDifferent:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -90,7 +90,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsDifferent:first.number second:second.number third:third.number];
 }
 
-- (BOOL)allSymbolAreEqual:(NSMutableArray *)cards {
+- (BOOL)allSymbolAreEqual:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -98,7 +98,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsEqual:first.symbol second:second.symbol third:third.symbol];
 }
 
-- (BOOL)allSymbolAreDifferent:(NSMutableArray *)cards {
+- (BOOL)allSymbolAreDifferent:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -106,7 +106,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsDifferent:first.symbol second:second.symbol third:third.symbol];
 }
 
-- (BOOL)allShadingAreEqual:(NSMutableArray *)cards {
+- (BOOL)allShadingAreEqual:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -114,7 +114,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsEqual:first.shading second:second.shading third:third.shading];
 }
 
-- (BOOL)allShadingAreDifferent:(NSMutableArray *)cards {
+- (BOOL)allShadingAreDifferent:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -122,7 +122,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsDifferent:first.shading second:second.shading third:third.shading];
 }
 
-- (BOOL)allColorsAreEqual:(NSMutableArray *)cards {
+- (BOOL)allColorsAreEqual:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -130,7 +130,7 @@ static const int kMaxNumberAttributes = 4;
   return [self areAllIntsEqual:first.color second:second.color third:third.color];
 }
 
-- (BOOL)allColorsAreDifferent:(NSMutableArray *)cards {
+- (BOOL)allColorsAreDifferent:(NSArray<CGSetCard *> *)cards {
   CGSetCard *first = [cards objectAtIndex:0];
   CGSetCard *second = [cards objectAtIndex:1];
   CGSetCard *third = [cards objectAtIndex:2];
@@ -139,7 +139,7 @@ static const int kMaxNumberAttributes = 4;
 }
 
 - (ColorType)color {
-  return ((_color < undefinedColor) && (_color >= 0)) ? _color : undefinedColor;
+  return _color;
 }
 
 - (int)number {
@@ -147,17 +147,15 @@ static const int kMaxNumberAttributes = 4;
 }
 
 - (ShadeType)shading {
-  return ((_shading < undefinedShade) && (_shading >= 0)) ? _shading : undefinedShade;
+  return _shading;
 }
 
 - (SymbolType)symbol {
-  return ((_symbol < undefinedSymbol) && (_symbol >= 0)) ? _symbol : undefinedSymbol;
+  return _symbol;
 }
 
 -(void)setColor:(ColorType)color {
-  if ((color < undefinedColor) && (color >= 0)) {
-    _color = color;
-  }
+  _color = color;
 }
 
 -(void)setNumber:(int)number {
@@ -167,15 +165,11 @@ static const int kMaxNumberAttributes = 4;
 }
 
 -(void)setShading:(ShadeType)shading {
-  if ((shading < undefinedShade) && (shading >= 0)) {
-    _shading = shading;
-  }
+  _shading = shading;
 }
 
 -(void)setSymbol:(SymbolType)symbol {
-  if ((symbol < undefinedSymbol) && (symbol >= 0)) {
-    _symbol = symbol;
-  }
+  _symbol = symbol;
 }
 
 @end

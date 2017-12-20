@@ -11,10 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 - (nullable instancetype)initWithCardCount:(NSUInteger)count NS_DESIGNATED_INITIALIZER;
 
-- (CGCard *)cardAtIndex:(NSUInteger)index;
 - (void)chooseCardAtIndex:(NSUInteger)index;
-
-- (CGCard *) getCardAtIndex:(NSUInteger) index;
 
 @end
 

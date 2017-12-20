@@ -6,8 +6,6 @@
 //  All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 // To use Grid, simply alloc/init one, then
 //  decide what aspect ratio you want the things in the grid to have (cellAspectRatio)
 //  and how much space you want the grid to take up in total (size)

@@ -5,9 +5,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CGDeck()
+@interface CGDeck ()
 
-//@property (strong, nonatomic) NSMutableArray *cards; // Of CGCard.
+@property (readwrite, strong, nonatomic) NSArray<CGCard *> *cards;
 
 @end
 
@@ -15,34 +15,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init {
   if (self = [super init]) {
-    _cards = [[NSMutableArray alloc] init];
+    _cards = [[NSArray alloc] init];
   }
   
   return self;
 }
 
 - (void)addCard:(CGCard *)card {
-  [self addCard:card atTop:NO];
+  self.cards = [self.cards arrayByAddingObject:card];
+  //[self.cards addObject:card];
 }
 
-- (void)addCard:(CGCard *)card atTop:(BOOL)atTop {
-  if (atTop) {
-      [self.cards insertObject:card atIndex:0];
-  } else {
-      [self.cards addObject:card];
-  }
-}
-
-- (CGCard *)drawRandomCard {
-  CGCard *randomCard = nil;
-  
+- (nullable CGCard *)drawRandomCard {
   if (self.cards.count) {
     unsigned index = arc4random() % self.cards.count;
-    randomCard = self.cards[index];
-    [self.cards removeObjectAtIndex:index];
+    CGCard *randomCard = self.cards[index];
+    NSMutableArray *cardsArray = [self.cards mutableCopy];
+    [cardsArray removeObjectAtIndex:index];
+    self.cards = cardsArray;
+    return randomCard;
   }
   
-  return randomCard;
+  return nil;
 }
 
 @end

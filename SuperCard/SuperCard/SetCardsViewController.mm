@@ -1,10 +1,11 @@
 // Copyright (c) 2017 Lightricks. All rights reserved.
 // Created by nimrod gruber.
 
+#import "SetCardsViewController.h"
+
 #import "CGSetCard.h"
 #import "CGSetDeck.h"
 #import "CGSetGame.h"
-#import "SetCardsViewController.h"
 #import "Grid.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,19 +46,18 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (IBAction)addCards:(UIButton *)sender {
-  CGCard *newCard = nil;
+//  CGCard *newCard = nil;
   [self disableReDealBtn];
   for (int i = 0; i < self.game.addedCardsQuota; ++i) {
-    newCard = [self.game addCardToGame];
+    CGCard *newCard = [self.game addCardToGame];
     if (!newCard) {
+      [self.addCardsBtn setImage:[UIImage imageNamed:(newCard) ? @"dealMoreCards" : @"noCardsLeft"]
+                        forState:UIControlStateNormal];
       break;
     } else {
       [self addNewCardViewItemAtIndex:self.game.cards.count-1];
     }
   }
-  
-  [self.addCardsBtn setImage:[UIImage imageNamed:(newCard) ? @"dealMoreCards" : @"noCardsLeft"]
-      forState:UIControlStateNormal];
   
   [UIView animateWithDuration:1.0
     animations:^{
@@ -145,11 +145,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (IBAction)panGestureMoveDeck:(UIPanGestureRecognizer *)sender {
-  CGPoint gesturePoint = [sender locationInView:self.view];
-
   if ((sender.state == UIGestureRecognizerStateBegan) ||
      (sender.state == UIGestureRecognizerStateChanged) ||
      (sender.state == UIGestureRecognizerStateEnded)) {
+    CGPoint gesturePoint = [sender locationInView:self.view];
     [self moveGatheredCardsToPoint:gesturePoint];
   }
 }
@@ -264,7 +263,6 @@ NS_ASSUME_NONNULL_BEGIN
   [super viewDidLoad];
   self.panProperty.delegate = self;
 
-  // Do any additional setup after loading the view, typically from a nib.
   [self initializeGame];
   [self.view addSubview:self.viewBoundsForCards];
   for (SetCardView *newCardView in self.setCardViews) {

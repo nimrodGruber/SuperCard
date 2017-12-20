@@ -2,7 +2,8 @@
 // Created by nimrod gruber.
 
 #import "SetCardView.h"
-#import "CGSetCard.h"
+
+//#import "CGSetCard.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -143,6 +144,8 @@ static const float kVerticalIndentationStartPositionFactor = 0.1;
     case squiggle:
       return @"S";
       break;
+    case undefinedSymbol:
+      return nil;
   }
   
   return nil;
@@ -159,6 +162,8 @@ static const float kVerticalIndentationStartPositionFactor = 0.1;
     case purple:
       return @"P";
       break;
+    case undefinedColor:
+      return nil;
   }
   
   return nil;
@@ -175,6 +180,8 @@ static const float kVerticalIndentationStartPositionFactor = 0.1;
     case unfilled:
       return @"unfilled";
       break;
+    case undefinedShade:
+      return nil;
   }
   
   return nil;
@@ -205,8 +212,8 @@ static const float kVerticalIndentationStartPositionFactor = 0.1;
 
 #pragma mark - Personal Utility functions
 
-- (void)updateCardDisplay:(int)color theNumber:(int)number theShade:(int)shade
-      theSymbol:(int)symbol {
+- (void)updateCardDisplay:(ColorType)color theNumber:(int)number theShade:(ShadeType)shade
+      theSymbol:(SymbolType)symbol {
   self.color = color;
   self.number = number;
   self.shading = shade;

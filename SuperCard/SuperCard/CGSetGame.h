@@ -10,19 +10,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 - (nullable instancetype)initWithCardCount:(NSUInteger)count NS_DESIGNATED_INITIALIZER;
+
 - (CGCard *)cardAtIndex:(NSUInteger)index;
 - (void)chooseCardAtIndex:(NSUInteger)index;
 - (CGCard *)addCardToGame;
 
-@property (nonatomic) NSUInteger addedCardsQuota;
-@property (strong, nonatomic) NSMutableArray<CGCard *> *cards;
+@property (readonly, nonatomic) NSUInteger addedCardsQuota;
+@property (strong, nonatomic) NSArray<CGCard *> *cards;
+
 @end
 
 NS_ASSUME_NONNULL_END
-
-
-
-
-
-
-

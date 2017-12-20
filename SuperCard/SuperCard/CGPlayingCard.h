@@ -7,11 +7,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CGPlayingCard : CGCard
 
-+ (NSUInteger)maxRank;
-+ (NSArray *)validSuits;
+- (instancetype)initWithValues:(NSUInteger)rank suit:(NSString *)suit;
 
-@property (nonatomic) NSUInteger rank;
-@property (strong, nonatomic) NSString *suit;
++ (NSUInteger)maxRank;
++ (NSArray<NSString *> *)validSuits;
+
+@property (readonly, nonatomic) NSUInteger rank;
+@property (strong, readonly, nonatomic) NSString *suit;
 
 @end
 

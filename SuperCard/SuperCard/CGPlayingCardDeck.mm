@@ -9,14 +9,10 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation CGPlayingCardDeck
 
 - (instancetype)init {
-  self = [super init];
-  
-  if (self) {
+  if (self = [super init]) {
     for (NSString *suit in [CGPlayingCard validSuits]) {
       for (NSUInteger rank = 1; rank <= [CGPlayingCard maxRank]; ++rank){
-        CGPlayingCard *card = [[CGPlayingCard alloc] init];
-        card.rank = rank;
-        card.suit = suit;
+        CGPlayingCard *card = [[CGPlayingCard alloc] initWithValues:(NSUInteger)rank suit:(NSString *)suit];
         [self addCard:card];
       }
     }

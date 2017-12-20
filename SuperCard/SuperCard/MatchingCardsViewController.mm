@@ -1,10 +1,11 @@
 // Copyright (c) 2017 Lightricks. All rights reserved.
 // Created by nimrod gruber.
 
-#import "CGCardMatchingGame.h"
 #import "MatchingCardsViewController.h"
-#import "CGPlayingCardDeck.h"
+
+#import "CGCardMatchingGame.h"
 #import "CGPlayingCard.h"
+#import "CGPlayingCardDeck.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,34 +34,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateUI {
   for (PlayingCardView *cardView in self.playingCardViews) {
     NSUInteger cardViewIndex = [self.playingCardViews indexOfObject:cardView];
-    CGCard *card = [self.game cardAtIndex:cardViewIndex];
+    CGPlayingCard *card = (CGPlayingCard *)[self.game cardAtIndex:cardViewIndex];
     [self flipCardViewIfNeeded:card cardFrame:cardView];
     card.matched ? (cardView.alpha = 0.5) : (cardView.alpha = 1);
-    [cardView updateCardDisplay:((CGPlayingCard *)card).suit rank:((CGPlayingCard *)card).rank];
+    [cardView updateCardDisplay:card.suit rank:card.rank];
   }
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
 }
 
 - (void)flipCardViewIfNeeded:(CGCard *)card cardFrame:(PlayingCardView*)cardView {
-  if (card.chosen) {
-    if (cardView.faceUp == NO) {
-      [self flipAnimation:cardView];
-      cardView.faceUp = YES;
-    }
-  } else {
-    if (cardView.faceUp == YES) {
-      [self flipAnimation:cardView];
-      cardView.faceUp = NO;
-    }
+  if (card.chosen && cardView.faceUp == NO) {
+    [self flipAnimation:cardView];
+    cardView.faceUp = YES;
+  } else if (card.chosen == NO && cardView.faceUp == YES) {
+    [self flipAnimation:cardView];
+    cardView.faceUp = NO;
   }
 }
 
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
   NSUInteger chosenButtonIndex = [self.playingCardViews indexOfObject:sender.view];
-  PlayingCardView *cardView = (PlayingCardView *)self.playingCardViews[chosenButtonIndex];
-  if ([cardView cardIsNotInitialized]) {
-    [self initializeCardDisplay:cardView atIndex:chosenButtonIndex];
-  }
   [self.game chooseCardAtIndex:chosenButtonIndex];
   [self updateUI];
 }
@@ -73,17 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
     completion:^(BOOL finished) {}];
 }
 
-- (void)initializeCardDisplay:(PlayingCardView *)card atIndex:(NSUInteger)index {
-  CGCard *tmp = [self.game getCardAtIndex:index];
-  if ([tmp isKindOfClass:[CGPlayingCard class]]) {
-    card.rank = ((CGPlayingCard *)tmp).rank;
-    card.suit = ((CGPlayingCard *)tmp).suit;
-  }
-}
-
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
   
   for (PlayingCardView *view in self.playingCardViews) {
     [view addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)]];
